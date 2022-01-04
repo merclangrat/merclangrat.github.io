@@ -2,7 +2,7 @@
 
 The website is under construction.
 
-You can contact me using WhatsApp/Telegram **+49 170 475 8557** or email **root (at) lizaurus.com** (English/Russian)
+You can contact me using WhatsApp/Telegram **+49-170-475-8557** or email ***root(@)lizaurus.com*** (English/Russian)
 
 - My CV on [LinkedIn](https://www.linkedin.com/in/merclangrat/)
 - My page on [Vintage Computer Festival 2020 about BK-0010, the Soviet home computer](https://wiki.vcfb.de/2020/en:soviet_computers)
