@@ -12,6 +12,6 @@ But it's better not to do so, write in English, please.
 - [My Github (not so much there)](https://github.com/merclangrat)
 - My CV on [LinkedIn](https://www.linkedin.com/in/merclangrat/)
 - My page on [Vintage Computer Festival 2020 about BK-0010-01, the Soviet home computer](https://wiki.vcfb.de/2020/en:soviet_computers)
-- [Nekochan FTP archive + useful links](http://nekochan.lizaurus.com)
+- [Some old software, Nekochan FTP archive](http://lizaurus.com)
 
 This domain is NOT for sale!
