@@ -9,6 +9,10 @@ You can contact me (Russian/English/Ukrainian):
 **I do not speak German**. If you write to me in German, I can only read and answer using Google Translate/DeepL (or in English)  
 But it's better not to do so, write in English, please.
 
+**I do NOT like Mac OS X** (I don't call it anything else because, for me, MacOS is a Classic one). Mac OS X looks like putting a square peg into a round hole. Then, I am not the best person to ask about building software/troubleshooting anything on Mac OS X.
+
+In my everyday life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linux distro.
+
 - [My Github (not so much there)](https://github.com/merclangrat)
 - My CV on [LinkedIn](https://www.linkedin.com/in/merclangrat/)
 - My page on [Vintage Computer Festival 2020 about BK-0010-01, the Soviet home computer](https://wiki.vcfb.de/2020/en:soviet_computers)
