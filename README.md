@@ -7,9 +7,10 @@ You can contact me (Russian/English/Ukrainian):
 - Email ***mercurius(@)elming.org***
 
 **I do not speak German**. If you write to me in German, I can only read and answer using Google Translate/DeepL (or in English)  
-But it's better not to do so, that makes me nervous and uncomfortable. Write in English, please.
+But it's better not to do so, it makes me nervous and uncomfortable. Write in English, please.
 
-**I do NOT like Mac OS X** (I don't call it anything else because, for me, MacOS is a Classic one). Mac OS X looks like putting a square peg into a round hole. Then, I am not the best person to ask about building software/troubleshooting anything on it. And of course, I am against current Apple politics.
+**I do NOT like Mac OS X** (I don't call it anything else because, for me, MacOS is a Classic one). Mac OS X looks like putting a square peg into a round hole. Then, I am not the best person to ask about building software/troubleshooting anything on it.  
+And of course, I am against current Apple politics.
 
 In my everyday life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linux distro.
 
