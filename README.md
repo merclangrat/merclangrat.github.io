@@ -14,6 +14,11 @@ And of course, I am against current Apple politics.
 
 In my everyday life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linux distro.
 
+Also, I spend some time on using pkgsrc on Solaris 10 SPARC. Solaris is my "favourite" UNIX, I have [a blog post with the story](https://merclangrat.wordpress.com/2024/12/15/solaris-twenty-years-after/)  
+This is the page about my progress: [pkgsrc on Solaris 10 SPARC in 2024](/pkgsrc-solaris10). Feel free to contact me to exchange the experience!
+
+If writing emails isn't the best way, feel free to comment in my blog.
+
 - [My Github (not so much there)](https://github.com/merclangrat)
 - My CV on [LinkedIn](https://www.linkedin.com/in/merclangrat/)
 - My page on [Vintage Computer Festival 2020 about BK-0010-01, the Soviet home computer](https://wiki.vcfb.de/2020/en:soviet_computers)
