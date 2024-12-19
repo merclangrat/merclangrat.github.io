@@ -173,10 +173,11 @@ Who else helped me? ChatGPT. sometimes it provides too much information, but usu
 
 ## Getting new certificates:
 
-Even if openssl is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but better get newer ones. 
-I reminded that I had ca-certificates in Linux. ca-certificates needs py-cryptography which needs rust, and rust isn't available for Solaris-SPARC (yet).
+Even if openssl is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
 
-But it's just necessary to install security/mozilla-rootcerts-openssl to get certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
+I reminded that I had ca-certificates in Linux, but the pkgsrc package needs py-cryptography which needs rust, and rust isn't available for Solaris-SPARC (yet).
+
+But it's just necessary to install security/mozilla-rootcerts-openssl to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
 
 ## The result
 
