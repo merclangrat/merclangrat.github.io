@@ -48,8 +48,8 @@ My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk
 ## If something is failing
 
 It’s tricky sometimes with binutils (like as, ar, ld).
-Solaris has their own in /usr/ccs/bin and there are GNU binutils from OpenCSW, also, another version of GNU binutils can be installed using pkgsrc itself.
-Often it works with binutils which the build process catches (mostly, there are Solaris ones), but sometimes something is failing. Then:
+Solaris has their own in `/usr/ccs/bin` and there are GNU binutils from OpenCSW, also, another version of GNU binutils can be installed using pkgsrc itself.
+Often it works with binutils which the build process catches (mostly, Solaris ones), but sometimes something is failing. Then:
 
 - use environment variables like AR, AS, LD and try another utility
 - if the build process catches a wrong utility, create a symlink / adjust paths
@@ -216,7 +216,7 @@ gcc version 9.5.0 (GCC)
 
 gcc 9.5 to be installed in /usr/local : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc)
 
-I used Solaris as (/usr/ccs/bin/as) and ld (/usr/ccs/bin/ld), also --enable-obsolete because gcc 9.5 is the last version supporting Solaris 10.
+I used Solaris as (`/usr/ccs/bin/as`) and ld (`/usr/ccs/bin/ld`), also --enable-obsolete because gcc 9.5 is the last version supporting Solaris 10.
 
 The next step is to try to build gcc9 in the pkgsrc using this gcc9! Then, we'll have a package which can be installed without any hacks, and re-build those packages which need newer gcc "by a proper way".
 
