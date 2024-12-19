@@ -86,7 +86,7 @@ cd ${PKGSRC}/devel/libsol10-compat/
 bmake NO_CHECKSUM=yes
 ```
 
-...bmake unpacks our archive, but then fails because we need to `run autoreconf` -i to have configure
+...bmake unpacks our archive, but then fails because we need to run `autoreconf -i` to have configure
 
 ```bash
 cd ${PKGSRC}/devel/libsol10-compat/work/libsol10-compat-0.1.0
