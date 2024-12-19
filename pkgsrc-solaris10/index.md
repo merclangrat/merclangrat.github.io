@@ -14,7 +14,7 @@ This page will be updated when I get new results.
 6. [Getting new certificates](#getting-new-certificates)
 7. [The result](#the-result)
 8. [The system python](#the-system-python)
-9. [GCC 9.5](#gcc-9.5) 
+9. [GCC 9](#gcc-9)
 
 ## TL;DR
  
@@ -22,7 +22,7 @@ More or less, it’s successful. I am pleasantly surprised.
 There’s Python 3.12, OpenSSL 3.3.1 and a lot of modern software working on Solaris 10 SPARC!
 
 I use gcc 5.5 from OpenCSW. I installed Sun Studio 12.3 but I wasn't successful in building anything in the pkgsrc tree, but most of the packages need gcc.
-Also, I built gcc 9.5 from source, see [GCC 9.5](#gcc-9.5).
+Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 
 ## Why Solaris 10?
 
@@ -164,7 +164,7 @@ user    708m1.986s
 sys     44m31.926s
 ```
 
-it's built with new gcc and needs libs from the archive (see [GCC 9.5](#gcc-9.5) (gcc5 could't build it)
+it's built with new gcc and needs libs from the archive (see [GCC 9](#gcc-9) (gcc5 could't build it)
 
 pango: ?
 
@@ -198,7 +198,7 @@ and for root:
 
 Better to have `python3` and `python` symlinked to /usr/pkg/bin/python. There's /usr/sfw/bin/python coming with Solaris, it's version 2.3.3. Quite old, eh?
 
-## GCC 9.5
+## GCC 9
 
 I wasn't able to build the package (`devel/gcc9`), but I was able to built it just from source. It took ca. 2 days to build it on my Sun Blade 100.
 
