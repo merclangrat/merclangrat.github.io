@@ -49,7 +49,8 @@ My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk
 
 It’s tricky sometimes with binutils (like as, ar, ld).
 Solaris has their own in /usr/ccs/bin and there are GNU binutils from OpenCSW, also, another version of GNU binutils can be installed using pkgsrc itself.
-I am trying to use GNU binutils as much as possible, but sometimes something is failing. Then:
+Often it works with binutils which the build process catches (mostly, there are Solaris ones), but sometimes something is failing. Then:
+
 - use environment variables like AR, AS, LD and try another utility
 - if the build process catches a wrong utility, create a symlink / adjust paths
 - if there's an error, in most cases Google knows the answer
