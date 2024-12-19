@@ -21,14 +21,14 @@ This page will be updated when I get new results.
 More or less, it’s successful. I am pleasantly surprised.
 There’s Python 3.12, OpenSSL 3.3.1 and a lot of modern software working on Solaris 10 SPARC!
 
-I use gcc 5.5 from OpenCSW. I installed Sun Studio 12.3 but I wasn't successful in building anything in the pkgsrc tree, but most of the packages need gcc.
+I use gcc 5.5 from OpenCSW. I installed Sun Studio 12.3 but I wasn't successful in building anything in the pkgsrc tree, and most of the packages need gcc.
 Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 
 ## Why Solaris 10?
 
 I have Sun Ultra 60 and Sun Blade 100, Solaris 11 cannot be installed on them.
 OpenIndiana can, but it needs zfs and both of them don't have enough RAM.
-There's also another illumos-based system called Tribblix (tribblix.org), it looks nice but I decided to try on the original Sun Solaris 10 (01/13, the latest one).
+There's also another illumos-based system called [Tribblix](https://tribblix.org), it looks nice but I decided to try on the original Sun Solaris 10 (01/13, the latest one).
 
 I don't have access to original Oracle repositories for patches and updates. Then I have the system how it comes from the DVD.
 
@@ -37,7 +37,7 @@ I don't have access to original Oracle repositories for patches and updates. The
 pkgsrc HOWTO is here: [https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/](https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/)
 There's a wiki page from 2007, it's old but can be useful: [https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris](https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris)
 
-I had to take pkgsrc 2024Q2 because 2024Q3 has Perl 5.40, which I couldn't build on Solaris.
+I had to take [pkgsrc 2024Q2](https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2024Q2/pkgsrc-2024Q2.tar.gz) because 2024Q3 has Perl 5.40, which I couldn't build on Solaris 10.
 there was an issue in Github [https://github.com/Perl/perl5/issues/22728](https://github.com/Perl/perl5/issues/22728) – it’s closed, then maybe I'll give it a try again later.
 
 sunfreeware.com is not available anymore (at least, for free), then I am using gcc5 and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/)
@@ -86,7 +86,7 @@ cd ${PKGSRC}/devel/libsol10-compat/
 bmake NO_CHECKSUM=yes
 ```
 
-...bmake unpacks our archive, but then fails because we need to run autoreconf -i to have configure
+...bmake unpacks our archive, but then fails because we need to `run autoreconf` -i to have configure
 
 ```bash
 cd ${PKGSRC}/devel/libsol10-compat/work/libsol10-compat-0.1.0
@@ -155,7 +155,7 @@ This file just has different functions declarations, feel free to adjust them ho
 
 **cmake**: needs -lncurses because it tries to link itself with Solaris curses library + new gcc
 
-I removed two files connected to GHS (they caused error about gbuild but Green Hills software is not common for Solaris), also bmake package SSP_SUPPORTED=no (but I think it can be solved by another way, for example symlinking /usr/local/lib/sparcv9/libssp.so to /usr/pkg/lib).
+I removed two files connected to GHS (they caused error about `gbuild` from Green Hills software, I guess we don't need that), also `bmake package SSP_SUPPORTED=no` (I think it can be solved by another way, for example symlinking `/usr/local/lib/sparcv9/libssp.so` to `/usr/pkg/lib`).
 
 How long did it take to build cmake? Here it is:
 
@@ -171,13 +171,13 @@ pango: ?
 
 Who else helped me? ChatGPT. sometimes it provides too much information, but usually I brought my errors to it and it could help where to look/patch/fix/etc.
 
-## Getting new certificates:
+## Getting new certificates
 
-Even if openssl is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
+Even if `openssl` is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
 
 I reminded that I had ca-certificates in Linux, but the pkgsrc package needs py-cryptography which needs rust, and rust isn't available for Solaris-SPARC (yet).
 
-But it's just necessary to install security/mozilla-rootcerts-openssl to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
+But it's just necessary to install `security/mozilla-rootcerts-openssl` to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
 
 ## The result
 
@@ -213,7 +213,7 @@ Thread model: posix
 gcc version 9.5.0 (GCC)
 ```
 
-gcc 9.5 to be installed in /usr/local : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc)
+gcc 9.5 to be installed in `/usr/local` : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc)
 
 I used Solaris as (`/usr/ccs/bin/as`) and ld (`/usr/ccs/bin/ld`), also --enable-obsolete because gcc 9.5 is the last version supporting Solaris 10.
 
