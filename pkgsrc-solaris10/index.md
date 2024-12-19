@@ -34,16 +34,16 @@ I don't have access to original Oracle repositories for patches and updates. The
 
 ## The process
 
-pkgsrc HOWTO is here: https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/
-There's a wiki page from 2007, it's old but can be useful: https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris
+pkgsrc HOWTO is here: [https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/](https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/)
+There's a wiki page from 2007, it's old but can be useful: [https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris](https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris)
 
 I had to take pkgsrc 2024Q2 because 2024Q3 has Perl 5.40, which I couldn't build on Solaris.
-there was an issue in Github https://github.com/Perl/perl5/issues/22728 – it’s closed, then maybe I'll give it a try again later.
+there was an issue in Github [https://github.com/Perl/perl5/issues/22728](https://github.com/Perl/perl5/issues/22728) – it’s closed, then maybe I'll give it a try again later.
 
-sunfreeware.com is not available anymore (at least, for free), then I am using gcc5 and other utilities (mentioned in the HOWTO) from https://www.opencsw.org/
+sunfreeware.com is not available anymore (at least, for free), then I am using gcc5 and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/)
 Also, I had to install sqlite3. Then, bootstrap and go on!
 
-My mk.conf is here: http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf
+My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf)
 
 ## If something is failing
 
@@ -60,7 +60,7 @@ I am trying to use GNU binutils as much as possible, but sometimes something is 
 ## Solaris 10 compat library
 
 Something is failing because Solaris is specific and doesn't have something which is available in other UNIX systems (constant definitions, header files, etc.).
-And there's Solaris 10 compat library, big thanks to Pekdon for this: https://github.com/pekdon/libsol10-compat/
+And there's Solaris 10 compat library, big thanks to Pekdon for this: [https://github.com/pekdon/libsol10-compat/](https://github.com/pekdon/libsol10-compat/)
 
 It has pkgsrc-compatible stuff to make a package... let's use it
 
@@ -103,7 +103,7 @@ It installs `libsol10_compat_patch_pkgsrc` which patches original pkgsrc files a
 - the list of packages to be patched (there's "packages" file in the repo, but you can create your own,
 - the root directory of pkgsrc tree, e.g. /usr/pkgsrc (I use /stuff/pkgsrc)
 
-There's a blog post about trying Solaris 10 as a desktop: https://pekdon.pekwm.se/posts/solaris_desktop/ - very useful!
+There's a blog post about trying Solaris 10 as a desktop: [https://pekdon.pekwm.se/posts/solaris_desktop/](https://pekdon.pekwm.se/posts/solaris_desktop/) - very useful!
 
 ## Other issues I faced
 
@@ -119,7 +119,7 @@ set rlim_fd_cur=32768
 
 after changing this file, you need to reboot!
 
-**libuv**: patched tcp.c but linking libnbcompat fails, add `-fPIC` flag https://gnats.netbsd.org/56668
+**libuv**: patched tcp.c but linking libnbcompat fails, add `-fPIC` flag [https://gnats.netbsd.org/56668](https://gnats.netbsd.org/56668)
 
 **rhash**: take newer version (1.4.5) from the next pkgsrc tarball (2024Q3), it builds successfully
 
@@ -181,12 +181,12 @@ It's necessary to install security/mozilla-rootcerts-openssl to get certificates
 
 ## The result
 
-The packages I have successfully built already: http://lizaurus.com/solaris10/pkgsrc-solaris10/
+The packages I have successfully built already: [http://lizaurus.com/solaris10/pkgsrc-solaris10/](http://lizaurus.com/solaris10/pkgsrc-solaris10/)
 Almost all of them have been built by gcc5 from OpenCSW and some tools need its libgcc_s. 
 
 Packages built by gcc9 (see below) are in a subfolder (cmake, graphite, harfbuzz).
 
-After the bootstrap, there's pkg_install utility and those packages can be just installed without rebuilding. My bootstrap is also there: http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap
+After the bootstrap, there's pkg_install utility and those packages can be just installed without rebuilding. My bootstrap is also there: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap)
 
 To make life simpler, I configure my PATH to look in /usr/pkg first:
 `PATH=/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
@@ -213,7 +213,7 @@ Thread model: posix
 gcc version 9.5.0 (GCC)
 ```
 
-gcc 9.5 to be installed in /usr/local : http://lizaurus.com/solaris10/gcc
+gcc 9.5 to be installed in /usr/local : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc)
 
 I used Solaris as (/usr/ccs/bin/as) and ld (/usr/ccs/bin/ld), also --enable-obsolete because gcc 9.5 is the last version supporting Solaris 10.
 
