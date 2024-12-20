@@ -23,7 +23,7 @@ If writing emails isn't the best way for you, just comment in my blog.
 
 ---
 
-**I do NOT like Mac OS X**, it looks like putting a square peg into a round hole. Then, I am not the best person to ask about building software/troubleshooting anything on it.  
+**I do NOT like Mac OS X**, it looks like an attempt to put a square peg into a round hole. Then, I am not the best person to ask about building software/troubleshooting anything on it.  
 And of course, I am against current Apple politics.
 
 In my everyday life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linux distro.
