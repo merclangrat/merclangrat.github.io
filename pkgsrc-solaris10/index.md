@@ -202,7 +202,7 @@ Better to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Th
 
 ## GCC 9
 
-I wasn't able to build the package (`devel/gcc9`) using OpenCSW's gcc5, but I was able to build it from source. It took ca. **2 days** to build it on my Sun Blade 100.
+I wasn't able to build the package (`devel/gcc9`) using OpenCSW's gcc5, but I was able to build it from source. It took ca. **2 days** on my Sun Blade 100.
 
 ```bash
 -bash-3.2# /usr/local/bin/gcc9.5 -v
@@ -215,7 +215,7 @@ Thread model: posix
 gcc version 9.5.0 (GCC)
 ```
 
-gcc 9.5 to be installed in `/usr/local` : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc)
+gcc 9.5 to be installed in `/usr/local` : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc) - just unpack the archive!
 
 I used Solaris as (`/usr/ccs/bin/as`) and ld (`/usr/ccs/bin/ld`), also --enable-obsolete because gcc 9.5 is the last version supporting Solaris 10.
 
