@@ -49,11 +49,12 @@ My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk
 
 ## If something is failing
 
-It’s tricky sometimes with binutils (like as, ar, ld).
-Solaris has their own in `/usr/ccs/bin` and there are GNU binutils from OpenCSW, also, another version of GNU binutils can be installed using pkgsrc itself.
-Often it works with binutils which the build process catches (mostly, Solaris ones), but sometimes something is failing. Then:
+It’s tricky sometimes with binutils (like `as`, `ar` and especially `ld`).  
+**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!) and GNU `ld` often doesn't work well because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I got errors about incompatible libraries while I was trying to use GNU `ld`.
 
-- use environment variables like AR, AS, LD and try another utility
+But, often packages are successfully built with binutils which the process catches (usually, Solaris `/usr/ccs/bin` ones), but sometimes something is failing. Then:
+
+- use environment variables like AR, AS and try another utility
 - if the build process catches a wrong utility, create a symlink / adjust paths
 - if there's an error, in most cases Google knows the answer
 - in some cases, adding environment variables (`CFLAGS`, `LDFLAGS`) helps
