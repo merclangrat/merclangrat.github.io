@@ -18,7 +18,7 @@ This page will be updated when I get new results.
 
 ## TL;DR
  
-More or less, it’s successful. I am pleasantly surprised. 
+More or less, it’s successful. I am pleasantly surprised.  
 There’s Python 3.12, OpenSSL 3.3.1 and a lot of modern software working on Solaris 10 SPARC!
 
 I use gcc 5.5 from OpenCSW. I installed Sun Studio 12.3 but I wasn't successful in building anything in the pkgsrc tree, and most of the packages need gcc.
@@ -169,15 +169,13 @@ sys     44m31.926s
 
 it's built with new gcc and needs libs from the archive (see [GCC 9](#gcc-9) (gcc5 could't build it)
 
-pango: ?
-
 Who else helped me? ChatGPT. sometimes it provides too much information, but usually I brought my errors to it and it could help where to look/patch/fix/etc.
 
 ## Getting new certificates
 
 Even if `security/openssl` is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
 
-I reminded that I had ca-certificates in Linux, but the pkgsrc package needs py-cryptography which needs rust, and rust isn't available for Solaris-SPARC (yet).
+I reminded that I had ca-certificates in Linux, but the package from pkgsrc needs `py-cryptography` (maybe, to be built? not to be installed?) which needs **Rust**, and Rust isn't available for Solaris-SPARC (yet).
 
 But it's just necessary to install `security/mozilla-rootcerts-openssl` to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
 
@@ -198,7 +196,7 @@ and for root:
 
 ## The system python
 
-Better to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. There's `/usr/sfw/bin/python` coming with Solaris, its version is 2.3.3. Quite old, eh?
+I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. There's `/usr/sfw/bin/python` coming with Solaris, its version is 2.3.3. Quite old, eh?
 
 ## GCC 9
 
