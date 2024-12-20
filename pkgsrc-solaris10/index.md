@@ -18,7 +18,7 @@ This page will be updated when I get new results.
 
 ## TL;DR
  
-More or less, it’s successful. I am pleasantly surprised.
+More or less, it’s successful. I am pleasantly surprised. 
 There’s Python 3.12, OpenSSL 3.3.1 and a lot of modern software working on Solaris 10 SPARC!
 
 I use gcc 5.5 from OpenCSW. I installed Sun Studio 12.3 but I wasn't successful in building anything in the pkgsrc tree, and most of the packages need gcc.
@@ -26,8 +26,8 @@ Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 
 ## Why Solaris 10?
 
-I have Sun Ultra 60 and Sun Blade 100, Solaris 11 cannot be installed on them.
-OpenIndiana can, but it needs **zfs** and both of them don't have enough RAM.
+I have Sun Ultra 60 and Sun Blade 100, Solaris 11 cannot be installed on them. 
+OpenIndiana can, but it needs **zfs** and both of them don't have enough RAM. 
 There's also another illumos-based system called [Tribblix](https://tribblix.org), it looks nice but I decided to try on the original **Sun Solaris 10 (01/13, the latest one)**.
 
 I don't have access to original Oracle repositories for patches and updates. Then I have the system how it comes from the DVD.
@@ -40,7 +40,7 @@ There's a wiki page from 2007, it's old but can be useful: [https://wtf.hijacked
 I took [pkgsrc 2024Q3](https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2024Q3/pkgsrc-2024Q3.tar.gz). The newer version has Perl 5.40, which I couldn't build on Solaris 10.
 There was an issue in Github [https://github.com/Perl/perl5/issues/22728](https://github.com/Perl/perl5/issues/22728) – it’s closed, then maybe I'll give it a try again later.
 
-`sunfreeware.com` is not available anymore (at least, for free), then I am using **gcc5** and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/)
+`sunfreeware.com` is not available anymore (at least, for free), then I am using **gcc5** and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/) 
 Also, I had to install **sqlite3**. Then, bootstrap and let's go!
 
 (Just FYI, this is the full list of packages I installed using OpenCSW's `pkgutil`: [http://lizaurus.com/solaris10/pkgutil_list](http://lizaurus.com/solaris10/pkgutil_list). I think, not all of them are necessary after I have many pkgsrc's packages.
@@ -56,8 +56,8 @@ Often it works with binutils which the build process catches (mostly, Solaris on
 - use environment variables like AR, AS, LD and try another utility
 - if the build process catches a wrong utility, create a symlink / adjust paths
 - if there's an error, in most cases Google knows the answer
-- in some cases, adding environment variables (CFLAGS, LDFLAGS or even LD_LIBRARY_PATH) helps
-- try to use libsol10-compat (see below)
+- in some cases, adding environment variables (`CFLAGS`, `LDFLAGS`) helps
+- try to use `libsol10-compat` (see below)
 - ...or you have to patch the code. In some cases, the compiler suggested me which definitions you need to use.
 
 ## Solaris 10 compat library
@@ -77,7 +77,7 @@ gcp -pruv libsol10-compat/ ${PKGSRC}/devel/ # I use GNU cp, Solaris cp -r will a
 cd ../..
 ```
 
-then, the repo directory must to be renamed to libsol10-compat-0.1.0 and then packed to the archive:
+then, the repo directory must to be renamed to libsol10-compat-0.1.0 and packed to the archive:
 
 (we are in $TMPDIR)
 
