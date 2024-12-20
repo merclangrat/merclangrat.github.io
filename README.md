@@ -17,9 +17,9 @@ In my everyday life, I use [Devuan Linux](https://devuan.org) - a systemd-free L
 Also, I spend some time on using **pkgsrc on Solaris 10 SPARC**. Solaris is my "favourite" UNIX since 2000s, I have [a blog post with the story](https://merclangrat.wordpress.com/2024/12/15/solaris-twenty-years-after/).
 
 This is the page about my progress: [pkgsrc on Solaris 10 SPARC in 2024](/pkgsrc-solaris10). Feel free to contact me to exchange the experience!
-If writing emails isn't the best way, just comment in my blog.
+If writing emails isn't the best way for you, just comment in my blog.
 
-And, because I am from the USSR, my big interest are **Soviet computers**.
+And, because I am from the USSR, my big interest is **Soviet computers**, especially PDP-11 compatible.
 
 - [My Github (not so much there)](https://github.com/merclangrat)
 - My CV on [LinkedIn](https://www.linkedin.com/in/merclangrat/)
