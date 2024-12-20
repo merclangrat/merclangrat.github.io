@@ -50,7 +50,7 @@ My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk
 ## Binutils or if something is wrong
 
 It’s tricky sometimes with binutils (like `as`, `ar` and especially `ld`).  
-**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!) and GNU `ld` often doesn't work well because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I got errors about incompatible libraries while I was trying to use GNU `ld`.
+**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!) and I could not use GNU `ld` because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I got errors about incompatible libraries while I was trying to use GNU `ld`.
 
 But, often packages are successfully built with binutils which the process catches (usually, Solaris `/usr/ccs/bin` ones), but sometimes something is failing. Then:
 
