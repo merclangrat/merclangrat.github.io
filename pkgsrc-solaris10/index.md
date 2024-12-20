@@ -9,7 +9,7 @@ This page will be updated when I get new results.
 1. [TL;DR](#tldr)
 2. [Why Solaris 10?](#why-solaris-10)
 3. [The process](#the-process)
-4. [If something is failing](#if-something-is-failing)
+4. [Binutils or if something is wrong](#binutils-or-if-something-is-wrong)
 5. [Other issues I faced](#other-issues-i-faced)
 6. [Getting new certificates](#getting-new-certificates)
 7. [The result](#the-result)
@@ -47,7 +47,7 @@ Also, I had to install **sqlite3**. Then, bootstrap and let's go!
 
 My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf)
 
-## If something is failing
+## Binutils or if something is wrong
 
 It’s tricky sometimes with binutils (like `as`, `ar` and especially `ld`).  
 **Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!) and GNU `ld` often doesn't work well because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I got errors about incompatible libraries while I was trying to use GNU `ld`.
