@@ -181,12 +181,12 @@ But it's just necessary to install `security/mozilla-rootcerts-openssl` to get n
 
 ## The result
 
-The packages I have successfully built already: [http://lizaurus.com/solaris10/pkgsrc-solaris10/](http://lizaurus.com/solaris10/pkgsrc-solaris10/)
-Almost all of them have been built by gcc5 from OpenCSW and some tools need its libgcc_s. 
+The packages I have already built are here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/](http://lizaurus.com/solaris10/pkgsrc-solaris10/)
+Almost all of them have been built by gcc5 from OpenCSW and some tools need its `libgcc_s`.
 
 Packages built by gcc9 (see below) are in a subfolder (cmake, graphite, harfbuzz).
 
-After the bootstrap, there's pkg_install utility and those packages can be just installed without rebuilding. My bootstrap is also there: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap)
+After the bootstrap, there're `pkg_*` utilities and those packages can be just installed without rebuilding. My bootstrap is also there: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap)
 
 To make life simpler, I configure my PATH to look in /usr/pkg first:
 `PATH=/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
