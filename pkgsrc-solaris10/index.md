@@ -1,7 +1,7 @@
 # Using pkgsrc on Solaris 10 SPARC in 2024
 
 I am trying to collect all ideas/hacks I used to build software using pkgsrc on Solaris 10 SPARC.
-The process is in progress. I am happy to get comments, ideas and exchange the experience: mercurius(@)elming.org
+The process is in progress. I am happy to get comments, ideas and exchange the experience: **mercurius(@)elming.org**
 
 This page will be updated when I get new results.
 
@@ -27,8 +27,8 @@ Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 ## Why Solaris 10?
 
 I have Sun Ultra 60 and Sun Blade 100, Solaris 11 cannot be installed on them.
-OpenIndiana can, but it needs zfs and both of them don't have enough RAM.
-There's also another illumos-based system called [Tribblix](https://tribblix.org), it looks nice but I decided to try on the original Sun Solaris 10 (01/13, the latest one).
+OpenIndiana can, but it needs **zfs** and both of them don't have enough RAM.
+There's also another illumos-based system called [Tribblix](https://tribblix.org), it looks nice but I decided to try on the original **Sun Solaris 10 (01/13, the latest one)**.
 
 I don't have access to original Oracle repositories for patches and updates. Then I have the system how it comes from the DVD.
 
@@ -37,11 +37,13 @@ I don't have access to original Oracle repositories for patches and updates. The
 pkgsrc HOWTO is here: [https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/](https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/)
 There's a wiki page from 2007, it's old but can be useful: [https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris](https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris)
 
-I had to take [pkgsrc 2024Q2](https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2024Q2/pkgsrc-2024Q2.tar.gz) because 2024Q3 has Perl 5.40, which I couldn't build on Solaris 10.
-there was an issue in Github [https://github.com/Perl/perl5/issues/22728](https://github.com/Perl/perl5/issues/22728) – it’s closed, then maybe I'll give it a try again later.
+I took [pkgsrc 2024Q3](https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2024Q3/pkgsrc-2024Q3.tar.gz). The newer version has Perl 5.40, which I couldn't build on Solaris 10.
+There was an issue in Github [https://github.com/Perl/perl5/issues/22728](https://github.com/Perl/perl5/issues/22728) – it’s closed, then maybe I'll give it a try again later.
 
-sunfreeware.com is not available anymore (at least, for free), then I am using gcc5 and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/)
-Also, I had to install sqlite3. Then, bootstrap and go on!
+`sunfreeware.com` is not available anymore (at least, for free), then I am using **gcc5** and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/)
+Also, I had to install **sqlite3**. Then, bootstrap and let's go!
+
+(Just FYI, this is the full list of packages I installed using OpenCSW's `pkgutil`: [http://lizaurus.com/solaris10/pkgutil_list](http://lizaurus.com/solaris10/pkgutil_list). I think, not all of them are necessary after I have many pkgsrc's packages.
 
 My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf)
 
@@ -173,7 +175,7 @@ Who else helped me? ChatGPT. sometimes it provides too much information, but usu
 
 ## Getting new certificates
 
-Even if `openssl` is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
+Even if `security/openssl` is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
 
 I reminded that I had ca-certificates in Linux, but the pkgsrc package needs py-cryptography which needs rust, and rust isn't available for Solaris-SPARC (yet).
 
@@ -196,11 +198,11 @@ and for root:
 
 ## The system python
 
-Better to have `python3` and `python` symlinked to /usr/pkg/bin/python. There's /usr/sfw/bin/python coming with Solaris, it's version 2.3.3. Quite old, eh?
+Better to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. There's `/usr/sfw/bin/python` coming with Solaris, its version is 2.3.3. Quite old, eh?
 
 ## GCC 9
 
-I wasn't able to build the package (`devel/gcc9`), but I was able to built it just from source. It took ca. 2 days to build it on my Sun Blade 100.
+I wasn't able to build the package (`devel/gcc9`) using OpenCSW's gcc5, but I was able to build it from source. It took ca. **2 days** to build it on my Sun Blade 100.
 
 ```bash
 -bash-3.2# /usr/local/bin/gcc9.5 -v
