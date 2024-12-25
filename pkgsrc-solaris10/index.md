@@ -6,7 +6,7 @@ The process is in progress. I am happy to get comments, ideas and exchange the e
 This page will be updated when I get new results.
 
 ## Table of Contents
-[[TOC]]
+{% toc %}
 
 ## TL;DR
  
