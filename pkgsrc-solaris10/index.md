@@ -6,15 +6,7 @@ The process is in progress. I am happy to get comments, ideas and exchange the e
 This page will be updated when I get new results.
 
 ## Table of Contents
-1. [TL;DR](#tldr)
-2. [Why Solaris 10?](#why-solaris-10)
-3. [The process](#the-process)
-4. [Binutils or if something is wrong](#binutils-or-if-something-is-wrong)
-5. [Other issues I faced](#other-issues-i-faced)
-6. [Getting new certificates](#getting-new-certificates)
-7. [The result](#the-result)
-8. [The system python](#the-system-python)
-9. [GCC 9](#gcc-9)
+[[TOC]]
 
 ## TL;DR
  
@@ -35,6 +27,7 @@ I don't have access to original Oracle repositories for patches and updates. The
 ## The process
 
 pkgsrc HOWTO is here: [https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/](https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/)  
+Also, an official README: [https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/bootstrap/README.Solaris](https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/bootstrap/README.Solaris) - there's more information about Sun Studio, etc.  
 There's a wiki page from 2007, it's old but can be useful: [https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris](https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris)
 
 I took [pkgsrc 2024Q3](https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2024Q3/pkgsrc-2024Q3.tar.gz). The newer version has Perl 5.40, which I couldn't build on Solaris 10.  
@@ -123,11 +116,17 @@ set rlim_fd_cur=32768
 
 after changing this file, you need to reboot!
 
-**libuv**: patched tcp.c but linking libnbcompat fails, add `-fPIC` flag [https://gnats.netbsd.org/56668](https://gnats.netbsd.org/56668)
+### devel/libuv
 
-**rhash**: take newer version (1.4.5) from the next pkgsrc tarball (2024Q3), it builds successfully
+ patched tcp.c but linking libnbcompat fails, add `-fPIC` flag [https://gnats.netbsd.org/56668](https://gnats.netbsd.org/56668)
 
-**glib2**: I used libsol10-compat, but it still throws an error in 
+### misc/rhash
+
+take newer version (1.4.5) from the next pkgsrc tarball (2024Q3), it builds successfully
+
+### devel/glib2
+
+I used libsol10-compat, but it still thrown an error in 
 
 ```bash
 [466/1428] Compiling C object glib/tests/getpwuid-preload.so.p/getpwuid-preload.c.o
@@ -156,7 +155,9 @@ In file included from ../glib/tests/getpwuid-preload.c:24:0:
 
 This file just has different functions declarations, feel free to adjust them how they're declared in /usr/include/pwd.h and run bmake again.
 
-**cmake**: needs -lncurses because it tries to link itself with Solaris curses library + new gcc
+### devel/cmake
+
+cmake needs -lncurses because it tries to link itself with Solaris curses library + new gcc
 
 I removed two files connected to GHS (they caused error about `gbuild` from Green Hills software, I guess we don't need that), also `bmake package SSP_SUPPORTED=no` (I think it can be solved by another way, for example symlinking `/usr/local/lib/sparcv9/libssp.so` to `/usr/pkg/lib`).
 
@@ -168,7 +169,16 @@ user    708m1.986s
 sys     44m31.926s
 ```
 
-it's built with new gcc and needs libs from the archive (see [GCC 9](#gcc-9) (gcc5 could't build it)
+it's built with new gcc and needs libs from the archive (see [GCC 9](#gcc-9) (gcc5 could't build it).
+
+### graphics/gdk-pixbuf2
+
+I had to disable tests completely in meson build after initial configure (stopped by ctrl+c, disabled and started `bmake` again).  
+Also, it has an issue with `systeminfo.h` - just patch the file `pixops.c` to include it unconditionally.
+
+### devel/pango
+
+Building pango was tricky. There were linker problems, and because I was not successful to use `gld`, I had to replace `-z defs` to `-z nodefs` in meson build (also, after initial configure).
 
 Who else helped me? ChatGPT. sometimes it provides too much information, but usually I brought my errors to it and it could help where to look/patch/fix/etc.
 
