@@ -5,8 +5,23 @@ The process is in progress. I am happy to get comments, ideas and exchange the e
 
 This page will be updated when I get new results.
 
-## Table of Contents
-{% toc %}
+ * [TL;DR](#tldr)
+ * [Why Solaris 10?](#why-solaris-10)
+ * [The process](#the-process)
+ * [Binutils or if something is wrong](#binutils-or-if-something-is-wrong)
+ * [Solaris 10 compat library](#solaris-10-compat-library)
+    * [How to use it](#how-to-use-it)
+ * [Other issues I faced](#other-issues-i-faced)
+    * [devel/libuv](#devellibuv)
+    * [misc/rhash](#miscrhash)
+    * [devel/glib2](#develglib2)
+    * [devel/cmake](#develcmake)
+    * [graphics/gdk-pixbuf2](#graphicsgdk-pixbuf2)
+    * [devel/pango](#develpango)
+ * [Getting new certificates](#getting-new-certificates)
+ * [The result](#the-result)
+ * [The system python](#the-system-python)
+ * [GCC 9](#gcc-9)
 
 ## TL;DR
  
