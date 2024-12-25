@@ -42,16 +42,16 @@ I don't have access to original Oracle repositories for patches and updates. The
 ## The process
 
 pkgsrc HOWTO is here: [https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/](https://wiki.netbsd.org/pkgsrc/how_to_use_pkgsrc_on_solaris/)  
-Also, an official README: [https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/bootstrap/README.Solaris](https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/bootstrap/README.Solaris) - there's more information about Sun Studio, etc.  
+The official Solaris README: [https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/bootstrap/README.Solaris](https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/bootstrap/README.Solaris) - there's more information about Sun Studio, etc.  
 There's a wiki page from 2007, it's old but can be useful: [https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris](https://wtf.hijacked.us/wiki/index.php/Pkgsrc_on_solaris)
 
 I took [pkgsrc 2024Q3](https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2024Q3/pkgsrc-2024Q3.tar.gz). The newer version has Perl 5.40, which I couldn't build on Solaris 10.  
-There was an issue in Github [https://github.com/Perl/perl5/issues/22728](https://github.com/Perl/perl5/issues/22728) – it’s closed, then maybe I'll give it a try again later.
+(There was an issue in Github [https://github.com/Perl/perl5/issues/22728](https://github.com/Perl/perl5/issues/22728) – it’s closed, then maybe I'll give it a try again later.)
 
 `sunfreeware.com` is not available anymore (at least, for free), then I am using **gcc5** and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/) 
-Also, I had to install **sqlite3**. Then, bootstrap and let's go!
+Also, I had to install **sqlite3** from OpenCSW. Then, bootstrap and let's go!
 
-(Just FYI, this is the full list of packages I installed using OpenCSW's `pkgutil`: [http://lizaurus.com/solaris10/pkgutil_list](http://lizaurus.com/solaris10/pkgutil_list). I think, not all of them are necessary after I have many pkgsrc's packages.
+(Just FYI, this is the full list of packages I installed using OpenCSW's `pkgutil`: [http://lizaurus.com/solaris10/pkgutil_list](http://lizaurus.com/solaris10/pkgutil_list). I think, not all of them are necessary anymore, when I have many pkgsrc's packages.
 
 My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf)
 
