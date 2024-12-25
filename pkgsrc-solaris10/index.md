@@ -64,10 +64,11 @@ But, often packages are successfully built with binutils which the process catch
 
 - use environment variables like AR, AS and try another utility
 - if the build process catches a wrong utility, create a symlink / adjust paths
-- if there's an error, in most cases Google knows the answer
-- in some cases, adding environment variables (`CFLAGS`, `LDFLAGS`) helps
+- if there's an error, in most cases Google knows the answer or give you hints
+- in some cases, check and add environment variables (`CFLAGS`, `LDFLAGS`). Sometimes I had to add explicitly `-m64` because of Solaris ABI
+- in some other cases, libraries cannot be found, just add them to `LDFLAGS` explicitly in Makefile
 - try to use `libsol10-compat` (see below)
-- ...or you have to patch the code. In some cases, the compiler suggested me which definitions you need to use.
+- ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me which definitions you need to use.
 
 ## Solaris 10 compat library
 
