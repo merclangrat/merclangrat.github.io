@@ -18,6 +18,8 @@ This page will be updated when I get new results.
     * [devel/cmake](#develcmake)
     * [graphics/gdk-pixbuf2](#graphicsgdk-pixbuf2)
     * [devel/pango](#develpango)
+    * [graphics/netpbm](#graphicsnetpbm)
+    * [security/gnutls](#securitygnutls)
  * [Getting new certificates](#getting-new-certificates)
  * [The result](#the-result)
  * [The system python](#the-system-python)
@@ -58,7 +60,8 @@ My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk
 ## Binutils or if something is wrong
 
 It’s tricky sometimes with binutils (like `as`, `ar` and especially `ld`).  
-**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!) and I could not use GNU `ld` because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I got errors about incompatible libraries while I was trying to use GNU `ld`.
+**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!). `pkgsrc` has `ABI` option in `mk.conf` but sometimes I got an `ELFCLASS` error. It often helped to explicitly specify `CFLAGS+=-m64 CXXFLAGS+=-m64`.  
+And I could not use GNU `ld` because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I got errors about incompatible libraries. If I give it a try again, I'll share the experience.
 
 But, often packages are successfully built with binutils which the process catches (usually, Solaris `/usr/ccs/bin` ones), but sometimes something is failing. Then:
 
@@ -110,6 +113,8 @@ bmake install
 
 And yes! there's a package! Thank you again Pekdon!
 
+**Newer version 0.2.x**: I had to add implementation of `open_memstream` to it, then there's a fork: [https://github.com/merclangrat/libsol10-compat](https://github.com/merclangrat/libsol10-compat). I guess there will be more functions added.
+
 ### How to use it
 
 It installs `libsol10_compat_patch_pkgsrc` which patches original pkgsrc files and takes two arguments:
@@ -120,7 +125,7 @@ There's a blog post about trying Solaris 10 as a desktop: [https://pekdon.pekwm.
 
 ## Other issues I faced
 
-Of course this list isn't full, feel free to ask me if you have a specific issue.
+Of course this list isn't full, feel free to ask me if you have a specific issue. Sometimes I didn't document thoroughly what happened, sorry for that!
 
 too many open files - Solaris has ulimit as usual, but it cannot be more than set in `/etc/system`. And if it's not set, the default is 256.
 My settings are:
@@ -197,6 +202,15 @@ Also, it has an issue with `systeminfo.h` - just patch the file `pixops.c` to in
 Building pango was tricky. There were linker problems, and because I was not successful to use `gld`, I had to replace `-z defs` to `-z nodefs` in meson build (also, after initial configure).
 
 Who else helped me? ChatGPT. sometimes it provides too much information, but usually I brought my errors to it and it could help where to look/patch/fix/etc.
+
+### graphics/netpbm
+
+`netpbm` mysteriously has just `cc` without paths in `config.mk.in`, and it doesn't get changed by configure scripts. Putting `cc` symlink somewhere to `/usr/pkg/bin` didn't help, I had to change the path in the file and run bmake again.
+
+### security/gnutls
+
+Oh, that was the trickiest one! I don't know why building via `bmake` was failing, because if I used `gmake` in the source directory, it worked. I had to build it like this, but then use `readelf` and `elfedit` to fix binaries because there were relative paths.  
+I think to try again and figure out what was happening there to make it buildable via `bmake` properly.
 
 ## Getting new certificates
 
