@@ -116,7 +116,8 @@ bmake install
 
 And yes! there's a package! Thank you again Pekdon!
 
-**Newer version 0.2.x**: I had to add implementation of `open_memstream` to it, then there's a fork: [https://github.com/merclangrat/libsol10-compat](https://github.com/merclangrat/libsol10-compat). I guess there will be more functions added.
+**Newer version 0.2.x**: I had to add implementation of `open_memstream` to it, then there's a fork: [https://github.com/merclangrat/libsol10-compat](https://github.com/merclangrat/libsol10-compat). I guess there will be more functions/definitions added (`static_assert` is the first candidate).  
+This is not completely my code! ChatGPT helped me to create it.
 
 ### How to use it
 
@@ -225,7 +226,9 @@ I think to try again and figure out what was happening there to make it buildabl
 
 It uses `static_assert` which is not available in Solaris, I patched the code and could build it.
 
-Who else helped me? ChatGPT. sometimes it provides too much information, but usually I brought my errors to it and it could help where to look/patch/fix/etc.
+---
+
+Also, I used ChatGPT asking questions and copy-pasting errors. Sometimes it provided too much information, but it could help where to look/patch/fix/etc.
 
 ## Getting new certificates
 
@@ -240,7 +243,7 @@ But it's just necessary to install `security/mozilla-rootcerts-openssl` to get n
 The packages I have already built are here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/](http://lizaurus.com/solaris10/pkgsrc-solaris10/)
 Almost all of them have been built by gcc5 from OpenCSW and some tools need its `libgcc_s`.
 
-Packages built by gcc9 (see below) are in a subfolder (cmake, graphite, harfbuzz).
+Packages built by gcc9 (see below) are in a subfolder.
 
 After the bootstrap, there're `pkg_*` utilities and those packages can be just installed without rebuilding. My bootstrap is also there: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap)
 
