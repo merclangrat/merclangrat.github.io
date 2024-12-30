@@ -62,19 +62,19 @@ My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk
 ## Binutils or if something is wrong
 
 It’s tricky sometimes with binutils (like `as`, `ar` and especially `ld`).  
-**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!). `pkgsrc` has `ABI` option in `mk.conf` but sometimes I got an `ELFCLASS` error. It often helped to explicitly specify `CFLAGS+=-m64 CXXFLAGS+=-m64`.  
-And I could not use GNU `ld` because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I got errors about incompatible libraries. If I give it a try again, I'll share the experience.
+**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!). `pkgsrc` has `ABI` option in `mk.conf` but sometimes I get an `ELFCLASS` error. It often helps to specify `CFLAGS+=-m64 CXXFLAGS+=-m64`.  
+And I can't use GNU `ld` because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I get errors about incompatible libraries. If I give it a try again, I'll share the experience.
 
 But, often packages are successfully built with binutils which the process catches (usually, Solaris `/usr/ccs/bin` ones), but sometimes something is failing. Then:
 
 - use environment variables like AR, AS and try another utility
 - if the build process catches a wrong utility, create a symlink / adjust paths
 - if there's an error, in most cases Google knows the answer or give you hints
-- check and add environment variables (`CFLAGS`, `LDFLAGS`). Sometimes I had to add explicitly `-m64` because of Solaris ABI
-- libraries cannot be found (or the linker tries to use wrong libraries). Add them to `LDFLAGS` explicitly in Makefile, or sometimes it's necessary to patch build scenarios (Makefiles, meson.builds, etc.)
-- meson can't find correct tools (pkg-config, cmake, etc.). They aren't explicitly mentioned in `USE_TOOLS` in Makefile, just add them.
+- check and add environment variables (`CFLAGS`, `LDFLAGS`). Sometimes I had to add `-m64` because of Solaris ABI
+- libraries cannot be found (or the linker tries to use wrong libraries). Add them to `LDFLAGS` in Makefile, or sometimes it's necessary to patch build scenarios (Makefiles, meson.builds, etc.)
+- meson can't find correct tools (pkg-config, cmake, etc.). They aren't mentioned in `USE_TOOLS` in Makefile, just add them.
 - try to use `libsol10-compat` (see below)
-- ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me which definitions you need to use.
+- ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me what I needed to use.
 
 ## Solaris 10 compat library
 
