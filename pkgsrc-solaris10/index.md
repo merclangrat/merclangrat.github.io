@@ -16,6 +16,7 @@ This page will be updated when I get new results.
     * [misc/rhash](#miscrhash)
     * [devel/glib2](#develglib2)
     * [devel/cmake](#develcmake)
+    * [databases/shared-mime-info](#databasesshared-mime-info)
     * [graphics/gdk-pixbuf2](#graphicsgdk-pixbuf2)
     * [devel/pango](#develpango)
     * [graphics/netpbm](#graphicsnetpbm)
@@ -69,8 +70,9 @@ But, often packages are successfully built with binutils which the process catch
 - use environment variables like AR, AS and try another utility
 - if the build process catches a wrong utility, create a symlink / adjust paths
 - if there's an error, in most cases Google knows the answer or give you hints
-- in some cases, check and add environment variables (`CFLAGS`, `LDFLAGS`). Sometimes I had to add explicitly `-m64` because of Solaris ABI
-- in some other cases, libraries cannot be found, just add them to `LDFLAGS` explicitly in Makefile
+- check and add environment variables (`CFLAGS`, `LDFLAGS`). Sometimes I had to add explicitly `-m64` because of Solaris ABI
+- libraries cannot be found (or the linker tries to use wrong libraries). Add them to `LDFLAGS` explicitly in Makefile, or sometimes it's necessary to patch build scenarios (Makefiles, meson.builds, etc.)
+- meson can't find correct tools (pkg-config, cmake, etc.). They aren't explicitly mentioned in `USE_TOOLS` in Makefile, just add them.
 - try to use `libsol10-compat` (see below)
 - ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me which definitions you need to use.
 
@@ -193,11 +195,17 @@ sys     44m31.926s
 
 it's built with new gcc and needs libs from the archive (see [GCC 9](#gcc-9) (gcc5 could't build it).
 
+### databases/shared-mime-info
+
+It has `devel/glib2` as a dependency and uses `libglib-2.0.so`,`libgio-2.0.so`,`libgobject-2.0.so` and `libgmodule-2.0.so`. And the linker doesn't link correctly with `libgmodule-2.0.so`, trying to use the system one, which is very old.  
+I had to change `build.ninja` after `bmake configure` - put this library explicitly using the full path.
+
+Also, I had to comment `USE_CXX_FEATURES=filesystem` in Makefile, or it tries to install gcc10 which is not available for Solaris. gcc9 builds it correctly, it has this feature.
+
 ### graphics/gdk-pixbuf2
 
-**This one is seriously broken. It builds but doesn't work. I am trying to find a way**.  
-I had to disable tests completely in meson build after initial configure (stopped by ctrl+c, disabled and started `bmake` again).  
-Also, it has an issue with `systeminfo.h` - just patch the file `pixops.c` to include it unconditionally.
+`databases/shared-mime-info` breaks `graphics/gdk-pixbuf2` - it needs `mime.cache` (it took 3 days for me to figure out where the problem was).  
+After I fixed it, `gdk-pixbuf2` has a small issue with `systeminfo.h` - just patch the file `pixops.c` to include it unconditionally. And it builds. And it works!
 
 ### devel/pango
 
