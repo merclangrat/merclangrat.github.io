@@ -20,6 +20,7 @@ This page will be updated when I get new results.
     * [devel/pango](#develpango)
     * [graphics/netpbm](#graphicsnetpbm)
     * [security/gnutls](#securitygnutls)
+    * [graphics/MesaLib](#graphicsmesalib)
  * [Getting new certificates](#getting-new-certificates)
  * [The result](#the-result)
  * [The system python](#the-system-python)
@@ -194,14 +195,14 @@ it's built with new gcc and needs libs from the archive (see [GCC 9](#gcc-9) (gc
 
 ### graphics/gdk-pixbuf2
 
+**This one is seriously broken. It builds but doesn't work. I am trying to find a way**.  
 I had to disable tests completely in meson build after initial configure (stopped by ctrl+c, disabled and started `bmake` again).  
 Also, it has an issue with `systeminfo.h` - just patch the file `pixops.c` to include it unconditionally.
 
 ### devel/pango
 
 Building pango was tricky. There were linker problems, and because I was not successful to use `gld`, I had to replace `-z defs` to `-z nodefs` in meson build (also, after initial configure).
-
-Who else helped me? ChatGPT. sometimes it provides too much information, but usually I brought my errors to it and it could help where to look/patch/fix/etc.
+`pango` and `cairo` seem to work well because I could build `rxvt-unicode` and there's a nice terminal! Woohoo!
 
 ### graphics/netpbm
 
@@ -211,6 +212,12 @@ Who else helped me? ChatGPT. sometimes it provides too much information, but usu
 
 Oh, that was the trickiest one! I don't know why building via `bmake` was failing, because if I used `gmake` in the source directory, it worked. I had to build it like this, but then use `readelf` and `elfedit` to fix binaries because there were relative paths.  
 I think to try again and figure out what was happening there to make it buildable via `bmake` properly.
+
+### graphics/MesaLib
+
+It uses `static_assert` which is not available in Solaris, I patched the code and could build it.
+
+Who else helped me? ChatGPT. sometimes it provides too much information, but usually I brought my errors to it and it could help where to look/patch/fix/etc.
 
 ## Getting new certificates
 
