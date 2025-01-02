@@ -22,6 +22,7 @@ This page will be updated when I get new results.
     * [graphics/netpbm](#graphicsnetpbm)
     * [security/gnutls](#securitygnutls)
     * [graphics/MesaLib](#graphicsmesalib)
+    * [x11/gtk3](#x11gtk3)
  * [Getting new certificates](#getting-new-certificates)
  * [The result](#the-result)
  * [The system python](#the-system-python)
@@ -225,6 +226,15 @@ I think to try again and figure out what was happening there to make it buildabl
 ### graphics/MesaLib
 
 It uses `static_assert` which is not available in Solaris, I patched the code and could build it.
+
+### x11/gtk3
+
+Solaris linker (`/usr/ccs/bin/ld`) doesn't support `-Wl,--export-dynamic` - actually, there's a `BUILDLINK_TRANSFORM` option in Makefile to remove it, but `testsuite/gtk/builder` still uses it. Isn't it just a bug? I had to remove it from `ninja.build`.
+
+And `x11/gtk3` has an option `-Dgtk-doc=true` to build a documentation using `xsltproc`. On my Sun Blade 100 with 1.5G of RAM, it was working for 36 hours and couldn't get done.  
+I had to stop it and set `-Dgtk-doc` to `false` - but in this case `bmake install` fails. The documentation files are specified in `PLIST`. Of course, there are two options:
+- patch `PLIST` and remove everything connected to `gtk-doc`, then package doesn't include the documentation (maybe it's even not needed)
+- or, download a binary package for any platform (docs are just html) and put the files into `.work/destdir/usr/pkg/share`.
 
 ---
 
