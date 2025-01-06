@@ -23,7 +23,10 @@ This page will be updated when I get new results.
     * [security/gnutls](#securitygnutls)
     * [graphics/MesaLib](#graphicsmesalib)
     * [x11/gtk3](#x11gtk3)
+    * [www/netsurf](#wwwnetsurf)
+    * [textproc/groff](#textprocgroff)
  * [Getting new certificates](#getting-new-certificates)
+ * [Adding Solaris fonts](#adding-solaris-fonts)
  * [The result](#the-result)
  * [The system python](#the-system-python)
  * [GCC 9](#gcc-9)
@@ -31,7 +34,7 @@ This page will be updated when I get new results.
 ## TL;DR
  
 More or less, it’s successful. I am pleasantly surprised.  
-There’s Python 3.12, OpenSSL 3.3.1 and a lot of modern software working on Solaris 10 SPARC!
+There’s Python 3.12, OpenSSL 3.3.1, Ruby 3.x and a lot of modern software working on Solaris 10 SPARC!
 
 I use gcc 5.5 from OpenCSW. I installed Sun Studio 12.3 but I wasn't successful in building anything in the pkgsrc tree, and most of the packages need gcc.
 Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
@@ -39,7 +42,7 @@ Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 ## Why Solaris 10?
 
 I have Sun Ultra 60 and Sun Blade 100, Solaris 11 cannot be installed on them.  
-OpenIndiana can, but it needs **zfs** and both of them don't have enough RAM.   
+OpenIndiana can, but it needs **zfs**. I purchased RAM for the Blade and it now has 1.5G... would be enough? I'll give it a try. Later.  
 There's also another illumos-based system called [Tribblix](https://tribblix.org), it looks nice but I decided to try on the original **Sun Solaris 10 (01/13, the latest one)**.
 
 I don't have access to original Oracle repositories for patches and updates. Then I have the system how it comes from the DVD.
@@ -73,6 +76,7 @@ But, often packages are successfully built with binutils which the process catch
 - if there's an error, in most cases Google knows the answer or give you hints
 - check and add environment variables (`CFLAGS`, `LDFLAGS`). Sometimes I had to add `-m64` because of Solaris ABI
 - libraries cannot be found (or the linker tries to use wrong libraries). Add them to `LDFLAGS` in Makefile, or sometimes it's necessary to patch build scenarios (Makefiles, meson.builds, etc.)
+- some functions in Solaris include files are enabled only if `__EXTENSIONS__` is set
 - meson can't find correct tools (pkg-config, cmake, etc.). They aren't mentioned in `USE_TOOLS` in Makefile, just add them.
 - try to use `libsol10-compat` (see below)
 - ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me what I needed to use.
@@ -148,7 +152,7 @@ after changing this file, you need to reboot!
 
 ### misc/rhash
 
-take newer version (1.4.5) from the next pkgsrc tarball (2024Q3), it builds successfully
+take newer version (1.4.5) from the next pkgsrc tarball, it builds successfully
 
 ### devel/glib2
 
@@ -236,6 +240,18 @@ I had to stop it and set `-Dgtk-doc` to `false` - but in this case `bmake instal
 - patch `PLIST` and remove everything connected to `gtk-doc`, then package doesn't include the documentation (maybe it's even not needed)
 - or, download a binary package for any platform (docs are just html) and put the files into `.work/destdir/usr/pkg/share`.
 
+### www/netsurf
+
+Successfully, the new browser on Solaris! I had to patch some files and add missing libs to `LDFLAGS`.
+
+### textproc/groff
+
+`groff` is a text processor which can be found in each system. pkgsrc's build enables `groff-docs` by default and needs `py-pdf`.  
+as it's said on python website, `py-pdf` doesn't need any dependencies in general, but if image extraction is needed, it needs `Pillow` which needs **Rust**. Fail.
+
+I disabled `groff-docs` just running: `bmake install PKG_OPTIONS.groff=-groff-docs CFLAGS+=-D__EXTENSIONS__`  
+I guess I will try to build `py-pdf` without Pillow if another package would need it...
+
 ---
 
 Also, I used ChatGPT asking questions and copy-pasting errors. Sometimes it provided too much information, but it could help where to look/patch/fix/etc.
@@ -247,6 +263,18 @@ Even if `security/openssl` is installed, it cannot check certificates. There are
 I reminded that I had ca-certificates in Linux, but the package from pkgsrc needs `py-cryptography` which needs **Rust** for building, and Rust isn't available for Solaris-SPARC (yet).
 
 But it's just necessary to install `security/mozilla-rootcerts-openssl` to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
+
+## Adding Solaris fonts
+
+When I built `www/netsurf` and started it, there were no letters, only squares. Solaris has its own fonts and we just need to add them to pkgsrc's `fontconfig`, creating `/usr/pkg/etc/fontconfig/local.conf`:
+
+```bash
+<?xml version='1.0'?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+<fontconfig>
+ <dir>/usr/openwin/lib/X11/fonts</dir>
+</fontconfig>
+```
 
 ## The result
 
@@ -262,6 +290,8 @@ To make life simpler, I configure my PATH to look in /usr/pkg first:
 
 and for root:
 `PATH=/usr/pkg/sbin:/opt/csw/sbin:/usr/sfw/sbin:/usr/sbin:/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
+
+Unfortunately, I didn't put all my changes into patches (but some of them will be shared soon). I hope my explanations are useful if anyone needs to use pkgsrc on Solaris 10 SPARC in future.
 
 ## The system python
 
