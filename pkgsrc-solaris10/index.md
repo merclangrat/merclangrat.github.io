@@ -263,9 +263,10 @@ I found a solution. I downloaded fltk 1.3.5 and built it using gcc just by `./co
 
 ### net/tigervnc
 
-A couple of files have missing header files - I think, it's because Solaris has functions declared in other files than NetBSD.
+After `bmake configure`, add `#include <memory.h>` to `./work/tigervnc-1.14.0/unix/vncconfig/QueryConnectDialog.cxx` and `#include <unistd.h>` to `.work/tigervnc-1.14.0/unix/xserver/os/backtrace.c`  
+If it fails with linking during X.Org server building, just `cd ./work/tigervnc-1.14.0/unix/xserver/` and run `gmake`. Then, `bmake` will create the package.
 
-But the trickiest part was the font path. TigerVNC builds its own X.org, and its `./configure` has a parameter to set font paths. But in my case it didn't work.
+But the trickiest part was the font path. TigerVNC builds its own X.Org, and its `./configure` has a parameter to set font paths. But in my case it didn't work.
 By default, it sets  
 `COMPILEDDEFAULTFONTPATH = ${prefix}/share/fonts/X11/misc/,${prefix}/share/fonts/X11/TTF/,${prefix}/share/fonts/X11/OTF/,${prefix}/share/fonts/X11/Type1/,${prefix}/share/fonts/X11/100dpi/,${prefix}/share/fonts/X11/75dpi/`
 
