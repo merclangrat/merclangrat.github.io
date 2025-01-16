@@ -11,7 +11,12 @@ This page will be updated when I get new results.
  * [Binutils or if something is wrong](#binutils-or-if-something-is-wrong)
  * [Solaris 10 compat library](#solaris-10-compat-library)
     * [How to use it](#how-to-use-it)
- * [Other issues I faced](#other-issues-i-faced)
+ * [Getting new certificates](#getting-new-certificates)
+ * [Adding Solaris fonts](#adding-solaris-fonts)
+ * [The result](#the-result)
+ * [The system python](#the-system-python)
+ * [GCC 9](#gcc-9)
+ * [Some issues related to specific packages](#some-issues-related-to-specific-packages)
     * [devel/libuv](#devellibuv)
     * [misc/rhash](#miscrhash)
     * [devel/glib2](#develglib2)
@@ -27,11 +32,6 @@ This page will be updated when I get new results.
     * [textproc/groff](#textprocgroff)
     * [x11/fltk13](#x11fltk13)
     * [net/tigervnc](#nettigervnc)
- * [Getting new certificates](#getting-new-certificates)
- * [Adding Solaris fonts](#adding-solaris-fonts)
- * [The result](#the-result)
- * [The system python](#the-system-python)
- * [GCC 9](#gcc-9)
 
 ## TL;DR
  
@@ -136,7 +136,69 @@ It installs `libsol10_compat_patch_pkgsrc` which patches original pkgsrc files a
 
 There's a blog post about trying Solaris 10 as a desktop: [https://pekdon.pekwm.se/posts/solaris_desktop/](https://pekdon.pekwm.se/posts/solaris_desktop/) - very useful!
 
-## Other issues I faced
+## Getting new certificates
+
+Even if `security/openssl` is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
+
+I reminded that I had ca-certificates in Linux, but the package from pkgsrc needs `py-cryptography` which needs **Rust** for building, and Rust isn't available for Solaris-SPARC (yet).
+
+But it's just necessary to install `security/mozilla-rootcerts-openssl` to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
+
+## Adding Solaris fonts
+
+When I built `www/netsurf` and started it, there were no letters, only squares. Solaris has its own fonts and we just need to add them to pkgsrc's `fontconfig`, creating `/usr/pkg/etc/fontconfig/local.conf`:
+
+```bash
+<?xml version='1.0'?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+<fontconfig>
+ <dir>/usr/openwin/lib/X11/fonts</dir>
+</fontconfig>
+```
+
+## The result
+
+The packages I have already built are here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/](http://lizaurus.com/solaris10/pkgsrc-solaris10/)
+Almost all of them have been built by gcc5 from OpenCSW and some tools need its `libgcc_s`.
+
+Packages built by gcc9 (see below) are in a subfolder.
+
+After the bootstrap, there're `pkg_*` utilities and those packages can be just installed without rebuilding. My bootstrap is also there: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap)
+
+To make life simpler, I configure my PATH to look in /usr/pkg first:
+`PATH=/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
+
+and for root:
+`PATH=/usr/pkg/sbin:/opt/csw/sbin:/usr/sfw/sbin:/usr/sbin:/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
+
+Unfortunately, I didn't put all my changes into patches (but some of them will be shared soon). I hope my explanations are useful if anyone needs to use pkgsrc on Solaris 10 SPARC in future.
+
+## The system python
+
+I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. There's `/usr/sfw/bin/python` coming with Solaris, its version is 2.3.3. Quite old, eh?
+
+## GCC 9
+
+I wasn't able to build the package (`devel/gcc9`) using OpenCSW's gcc5, but I was able to build it from source. It took ca. **2 days** on my Sun Blade 100.
+
+```bash
+-bash-3.2# /usr/local/bin/gcc9.5 -v
+Using built-in specs.
+COLLECT_GCC=/usr/local/bin/gcc9.5
+COLLECT_LTO_WRAPPER=/usr/local/libexec/gcc/sparcv9-sun-solaris2.10/9.5.0/lto-wrapper
+Target: sparcv9-sun-solaris2.10
+Configured with: /stuff/tmp/gcc-9.5.0/configure --program-suffix=9.5 --enable-languages=c,c++ -v --enable-obsolete --enable-ld=yes
+Thread model: posix
+gcc version 9.5.0 (GCC)
+```
+
+gcc 9.5 to be installed in `/usr/local` : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc) - just unpack the archive!
+
+I used Solaris as (`/usr/ccs/bin/as`) and ld (`/usr/ccs/bin/ld`), also --enable-obsolete because gcc 9.5 is the last version supporting Solaris 10.
+
+The next step is to try to build gcc9 in the pkgsrc using this gcc9! Then, we'll have a package which can be installed without any hacks, and re-build those packages which need newer gcc "by a proper way".
+
+## Some issues related to specific packages
 
 Of course this list isn't full, feel free to ask me if you have a specific issue. Sometimes I didn't document thoroughly what happened, sorry for that!
 
@@ -282,65 +344,4 @@ TigerVNC has one more trick. Because SPARC is big-endian, when I try to connect 
 
 Also, I used ChatGPT asking questions and copy-pasting errors. Sometimes it provided too much information, but it could help where to look/patch/fix/etc.
 
-## Getting new certificates
-
-Even if `security/openssl` is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
-
-I reminded that I had ca-certificates in Linux, but the package from pkgsrc needs `py-cryptography` which needs **Rust** for building, and Rust isn't available for Solaris-SPARC (yet).
-
-But it's just necessary to install `security/mozilla-rootcerts-openssl` to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
-
-## Adding Solaris fonts
-
-When I built `www/netsurf` and started it, there were no letters, only squares. Solaris has its own fonts and we just need to add them to pkgsrc's `fontconfig`, creating `/usr/pkg/etc/fontconfig/local.conf`:
-
-```bash
-<?xml version='1.0'?>
-<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
-<fontconfig>
- <dir>/usr/openwin/lib/X11/fonts</dir>
-</fontconfig>
-```
-
-## The result
-
-The packages I have already built are here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/](http://lizaurus.com/solaris10/pkgsrc-solaris10/)
-Almost all of them have been built by gcc5 from OpenCSW and some tools need its `libgcc_s`.
-
-Packages built by gcc9 (see below) are in a subfolder.
-
-After the bootstrap, there're `pkg_*` utilities and those packages can be just installed without rebuilding. My bootstrap is also there: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap)
-
-To make life simpler, I configure my PATH to look in /usr/pkg first:
-`PATH=/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
-
-and for root:
-`PATH=/usr/pkg/sbin:/opt/csw/sbin:/usr/sfw/sbin:/usr/sbin:/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
-
-Unfortunately, I didn't put all my changes into patches (but some of them will be shared soon). I hope my explanations are useful if anyone needs to use pkgsrc on Solaris 10 SPARC in future.
-
-## The system python
-
-I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. There's `/usr/sfw/bin/python` coming with Solaris, its version is 2.3.3. Quite old, eh?
-
-## GCC 9
-
-I wasn't able to build the package (`devel/gcc9`) using OpenCSW's gcc5, but I was able to build it from source. It took ca. **2 days** on my Sun Blade 100.
-
-```bash
--bash-3.2# /usr/local/bin/gcc9.5 -v
-Using built-in specs.
-COLLECT_GCC=/usr/local/bin/gcc9.5
-COLLECT_LTO_WRAPPER=/usr/local/libexec/gcc/sparcv9-sun-solaris2.10/9.5.0/lto-wrapper
-Target: sparcv9-sun-solaris2.10
-Configured with: /stuff/tmp/gcc-9.5.0/configure --program-suffix=9.5 --enable-languages=c,c++ -v --enable-obsolete --enable-ld=yes
-Thread model: posix
-gcc version 9.5.0 (GCC)
-```
-
-gcc 9.5 to be installed in `/usr/local` : [http://lizaurus.com/solaris10/gcc](http://lizaurus.com/solaris10/gcc) - just unpack the archive!
-
-I used Solaris as (`/usr/ccs/bin/as`) and ld (`/usr/ccs/bin/ld`), also --enable-obsolete because gcc 9.5 is the last version supporting Solaris 10.
-
-The next step is to try to build gcc9 in the pkgsrc using this gcc9! Then, we'll have a package which can be installed without any hacks, and re-build those packages which need newer gcc "by a proper way".
 
