@@ -1,4 +1,4 @@
-# Using pkgsrc on Solaris 10 SPARC in 2024
+# Using pkgsrc on Solaris 10 SPARC in 2024/25
 
 I am trying to collect all ideas/hacks I used to build software using pkgsrc on Solaris 10 SPARC.
 The process is in progress. I am happy to get comments, ideas and exchange the experience: **mercurius(@)elming.org**
@@ -25,6 +25,8 @@ This page will be updated when I get new results.
     * [x11/gtk3](#x11gtk3)
     * [www/netsurf](#wwwnetsurf)
     * [textproc/groff](#textprocgroff)
+    * [x11/fltk13](#x11fltk13)
+    * [net/tigervnc](#nettigervnc)
  * [Getting new certificates](#getting-new-certificates)
  * [Adding Solaris fonts](#adding-solaris-fonts)
  * [The result](#the-result)
@@ -38,6 +40,8 @@ There’s Python 3.12, OpenSSL 3.3.1, Ruby 3.x and a lot of modern software work
 
 I use gcc 5.5 from OpenCSW. I installed Sun Studio 12.3 but I wasn't successful in building anything in the pkgsrc tree, and most of the packages need gcc.
 Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
+
+**Those packages are 64-bit. pkgsrc suggests to use ABI=64 in its manual (see below). I think I will try to build 32-bit ones too, or you can try if you want.**
 
 ## Why Solaris 10?
 
@@ -251,6 +255,27 @@ as it's said on python website, `py-pdf` doesn't need any dependencies in genera
 
 I disabled `groff-docs` just running: `bmake install PKG_OPTIONS.groff=-groff-docs CFLAGS+=-D__EXTENSIONS__`  
 I guess I will try to build `py-pdf` without Pillow if another package would need it...
+
+### x11/fltk13
+
+pkgsrc has fltk 1.3.9 which I couldn't build using gcc. If I tried Sun Studio, there was an error about ELFCLASS.  
+I found a solution. I downloaded fltk 1.3.5 and built it using gcc just by `./configure & gmake` with pkgsrc options, then put to the `work` subdirectory and made a package. Then, the packkage `fltk-1.3.9` actually has version `1.3.5`, but it seems to work...
+
+### net/tigervnc
+
+A couple of files have missing header files - I think, it's because Solaris has functions declared in other files than NetBSD.
+
+But the trickiest part was the font path. TigerVNC builds its own X.org, and its `./configure` has a parameter to set font paths. But in my case it didn't work.
+By default, it sets  
+`COMPILEDDEFAULTFONTPATH = ${prefix}/share/fonts/X11/misc/,${prefix}/share/fonts/X11/TTF/,${prefix}/share/fonts/X11/OTF/,${prefix}/share/fonts/X11/Type1/,${prefix}/share/fonts/X11/100dpi/,${prefix}/share/fonts/X11/75dpi/`
+
+I guess it would work, but somehow `${prefix}` wasn't resolved to a variable (it may be because `/bin/sh` is used somewhere which is horribly broken on Solaris).  
+I had to replace this line in all Makefiles and `.h` files where I found it, and put
+`COMPILEDDEFAULTFONTPATH = /usr/openwin/lib/X11/fonts/misc/,/usr/openwin/lib/X11/fonts/TrueType,/usr/openwin/lib/X11/fonts/Type1/,/usr/openwin/lib/X11/fonts/100dpi/,/usr/openwin/lib/X11/fonts/75dpi/` - to use Solaris fonts.
+
+Also, I needed to install `x11/xsetroot` and `wm/twm` (oh, I haven't tried to run CDE yet in VNC!).
+
+TigerVNC has one more trick. Because SPARC is big-endian, when I try to connect from x86-64 (a little-endian machine), it just shows me a white screen. And on the SPARC side, one of Xvnc threads gets crashed. `vncviewer` on Linux must be run with `-encoding hextile`.
 
 ---
 
