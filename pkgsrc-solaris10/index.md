@@ -79,11 +79,15 @@ But, often packages are successfully built with binutils which the process catch
 - if the build process catches a wrong utility, create a symlink / adjust paths
 - if there's an error, in most cases Google knows the answer or give you hints
 - check and add environment variables (`CFLAGS`, `LDFLAGS`). Sometimes I had to add `-m64` because of Solaris ABI
-- libraries cannot be found (or the linker tries to use wrong libraries). Add them to `LDFLAGS` in Makefile, or sometimes it's necessary to patch build scenarios (Makefiles, meson.builds, etc.)
+- libraries cannot be found (or the linker tries to use wrong libraries).
+   - check `work/.buildlink` directory for all necessary libraries/header files (and versions) and make symlinks there
+   - if it doesn't work, add them to `LDFLAGS` in Makefile, or sometimes it's necessary to patch build scenarios (Makefiles, meson.builds, etc.)
 - some functions in Solaris include files are enabled only if `__EXTENSIONS__` is set
 - meson can't find correct tools (pkg-config, cmake, etc.). They aren't mentioned in `USE_TOOLS` in Makefile, just add them.
 - try to use `libsol10-compat` (see below)
 - ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me what I needed to use.
+
+pkgsrc uses buildlink methodology [https://www.netbsd.org/docs/pkgsrc/buildlink.html](https://www.netbsd.org/docs/pkgsrc/buildlink.html) and symlinks necessary headers, libraries and pkgconfig `.pc` files into `work/.buildlink` subdirectory. It took some time for me to understand how that works! But yes, even if the library is installed but there's no direct dependency (`.mk` file isn't include), it isn't visible in the build process of the package.
 
 ## Solaris 10 compat library
 
