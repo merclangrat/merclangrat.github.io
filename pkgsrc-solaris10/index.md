@@ -136,6 +136,8 @@ Just run `gmake` inside the source folder. In some cases, it just run remaining 
 - missing libraries, e.g. `-lsocket -lnsl` (the software assumes them by default or looks for those functions in libc)
 - ELFCLASS error (flag `-m64` wasn't passed correctly)
 
+During this "manual" phase, the linker may put wrong (relative to buildlink) paths to libraries (`bmake install` informs about it), they must be fixed by `elfedit`.
+
 ## Solaris 10 compat library
 
 Something is failing because Solaris is specific and doesn't have something which is available in other UNIX systems (constant definitions, header files, etc.).
