@@ -234,7 +234,7 @@ Unfortunately, I didn't put all my changes into patches, but I hope my explanati
 
 ### The system python
 
-I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Solaris has Python 3, but much older.  
+I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Solaris has only Python 2.6.  
 And there are a lot of Python stuff can be installed using pkgsrc (only except modules depending on Rust).
 
 ## GCC 9
