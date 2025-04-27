@@ -17,10 +17,13 @@ This page will be updated when I get new results.
  * [Getting new certificates](#getting-new-certificates)
  * [Adding Solaris fonts](#adding-solaris-fonts)
  * [The result](#the-result)
- * [The system python](#the-system-python)
+    * [The system python](#the-system-python)
  * [GCC 9](#gcc-9)
 
 ## TL;DR
+
+The idea was to try and learn pkgsrc (not only on NetBSD, but on another system) and have modern software on Solaris. 
+It's quite old - Solaris 10 was initially released in 2005, and the latest update (U11) was released in January 2013.
  
 More or less, it’s successful. I am pleasantly surprised.  
 There’s Python 3.12, OpenSSL 3.3.1, Ruby 3.x and a lot of modern software working on Solaris 10 SPARC!
@@ -41,7 +44,7 @@ I have Sun Ultra 60 and Sun Blade 100, Solaris 11 cannot be installed on them.
 OpenIndiana can, but it needs **zfs**. I purchased RAM for the Blade and it now has 1.5G... would be enough? I'll give it a try. Later.  
 There's also another illumos-based system called [Tribblix](https://tribblix.org), it looks nice but I decided to try on the original **Sun Solaris 10 (01/13, the latest one)**.
 
-I don't have access to original Oracle repositories for patches and updates. Then I have the system how it comes from the DVD.
+I don't have access to original Oracle repositories for patches and updates. Then I have the system how it comes from Solaris 10 U11 DVD.
 
 ## The process
 
@@ -228,15 +231,15 @@ and for root:
 
 Unfortunately, I didn't put all my changes into patches, but I hope my explanations are useful if anyone needs to use pkgsrc on Solaris 10 SPARC in future.
 
-## The system python
+### The system python
 
 I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Solaris has Python 3, but much older.
 
-And there are a lot of Python stuff can be installed using pkgsrc (only except modules depending on Rust)
+And there are a lot of Python stuff can be installed using pkgsrc (only except modules depending on Rust).
 
 ## GCC 9
 
-I wasn't able to build the package (`devel/gcc9`) using OpenCSW's gcc5, but I was able to build it from source. It took ca. **2 days** on my Sun Blade 100.
+When I started, I wasn't able to build the package (`devel/gcc9`) using OpenCSW's gcc5 - I guess I didn't have enough knowledge about pkgsrc and all its stuff. But I built it from source as usual, it took ca. **2 days** on my Sun Blade 100.
 
 ```bash
 -bash-3.2# /usr/local/bin/gcc9.5 -v
