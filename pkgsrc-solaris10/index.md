@@ -93,7 +93,7 @@ libz.so.1 (SUNW_1.1) =>  (version not found)
 
 This is not an error during runtime, but GNU ld tries to resolve all symbols in all libraries it's linking, why it can cause an error. Especially for `libz.so`, I had to symlink Solaris' `libz.so` to `/usr/pkg/lib` and made GNU ld happy, then I removed the symlink and everything works well.
 
-# too many open files
+## too many open files
 
 Some packages (especially glib2 as I remember) try to have a lot of files open and hit Solaris' limit. Solaris has `ulimit` command as usual, but it cannot be more than set in `/etc/system`. And if it's not set, the default is 256.
 
@@ -229,6 +229,8 @@ Unfortunately, I didn't put all my changes into patches (but some of them will b
 ## The system python
 
 I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Solaris has Python 3, but much older.
+
+And there are a lot of Python stuff can be installed using pkgsrc (only except modules depending on Rust)
 
 ## GCC 9
 
