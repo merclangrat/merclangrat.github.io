@@ -3,7 +3,7 @@
 I am trying to collect all ideas/hacks I used to build software using pkgsrc on Solaris 10 SPARC.
 The process is in progress. I am happy to get comments, ideas and exchange the experience: **mercurius(@)elming.org**
 
-This page will be updated when I get new results.
+This page will be updated when I get new results. [The packages are here](http://lizaurus.com/solaris10/pkgsrc-solaris10).
 
  * [TL;DR](#tldr)
  * [Why Solaris 10?](#why-solaris-10)
