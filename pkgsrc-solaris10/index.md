@@ -8,7 +8,10 @@ This page will be updated when I get new results.
  * [TL;DR](#tldr)
  * [Why Solaris 10?](#why-solaris-10)
  * [The process](#the-process)
- * [Binutils or if something is wrong](#binutils-or-if-something-is-wrong)
+ * [Solaris ABI](#solaris-abi)
+ * [Binutils and versioned symbols](#binutils-and-versioned-symbols)
+ * [too many open files](#too-many-open-files)
+ * [If something is wrong](#if-something-is-wrong)
  * [Solaris 10 compat library](#solaris-10-compat-library)
     * [How to use it](#how-to-use-it)
  * [Getting new certificates](#getting-new-certificates)
@@ -43,6 +46,11 @@ Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 
 **Those packages are 64-bit. pkgsrc suggests to use ABI=64 in its manual (see below). I think I will try to build 32-bit ones too, or you can try if you want.**
 
+I tried to collect something which I faced during building specific packages - [here is the list](packages.md).  
+Of course this list isn't full, feel free to ask me if you have a specific issue. Sometimes I didn't document thoroughly what happened, sorry for that!
+
+**Coming soon**: Emulators on Solaris 10 SPARC!
+
 ## Why Solaris 10?
 
 I have Sun Ultra 60 and Sun Blade 100, Solaris 11 cannot be installed on them.  
@@ -67,11 +75,55 @@ Also, I had to install **sqlite3** from OpenCSW. Then, bootstrap and let's go!
 
 My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf)
 
-## Binutils or if something is wrong
+pkgsrc uses buildlink methodology [https://www.netbsd.org/docs/pkgsrc/buildlink.html](https://www.netbsd.org/docs/pkgsrc/buildlink.html) and symlinks necessary headers, libraries and pkgconfig `.pc` files into `work/.buildlink` subdirectory. It took some time for me to understand how that works! But yes, even if the library is installed but there's no direct dependency (`.mk` file isn't include), it isn't visible in the build process of the package.
 
-It’s tricky sometimes with binutils (like `as`, `ar` and especially `ld`).  
-**Solaris SPARC has its own peculiar ABI** with 32-bit and 64-bit binaries (throw the manual to me to get more information!). `pkgsrc` has `ABI` option in `mk.conf` but sometimes I get an `ELFCLASS` error. It often helps to specify `CFLAGS+=-m64 CXXFLAGS+=-m64`.  
-And I can't use GNU `ld` because Solaris `/usr/ccs/bin/ld` seems to know better about those things. I get errors about incompatible libraries. If I give it a try again, I'll share the experience.
+## Solaris ABI
+
+UltraSPARC CPUs are 64-bit processors, but SPARC (Scalable Processor Architecture) has traditionally been designed to support both 32-bit and 64-bit modes. The UltraSPARC I (which is 64-bit) is backward compatible with the earlier 32-bit SPARC V8 architecture, which means that it could run both 32-bit and 64-bit code.
+
+While UltraSPARC processors are 64-bit and support both 32-bit and 64-bit modes, the Solaris ABI is more complex because it needs to manage compatibility between 32-bit and 64-bit binaries. This dual-mode operation and backward compatibility with older software and hardware meant that Solaris had to support different ABIs (for 32-bit and 64-bit applications) and manage their interaction. This is more complicated than on x86_64, where the system was designed from the start with dual-mode operation in mind, making it simpler to run both 32-bit and 64-bit binaries on the same system.
+
+The Solaris ABI is a result of the need to maintain compatibility across many generations of hardware and software, from older 32-bit SPARC systems to the 64-bit UltraSPARC systems that came later.
+
+The best-practices say it's better to build 32-bit applications, but pkgsrc suggests to use ABI=64. But sometimes it's not passing proper options, and Solaris linker fails with ELFCLASS error. It often helps to specify `CFLAGS+=-m64 CXXFLAGS+=-m64`.
+
+## Binutils and versioned symbols
+
+Actually, all packages are built quite well with Solaris binutils, located in `/usr/ccs/bin`.
+
+While building Qt6 (really, Qt6 on Solaris 10 SPARC!) I found out that its plugins don't have a specific Qt-related metadata, and Solaris ld didn't link them correctly, then I needed GNU ld.
+
+How to make GNU ld working:
+
+- LDFLAGS must have `-Wl,-b,elf64-sparc-sol2` (in case of building 64-bit stuff)
+- there's a file `libgcc-unwind.map` which is not understood by GNU ld. It must be renamed or moved, but there must be empty file - because gcc relies on it while calling ld.
+- it's better to use GNU strip, not Solaris strip (and vice versa: GNU strip doesn't work with Solaris ld)
+
+A part of Solaris ABI is versioned symbols. Solaris uses them to guarantee binary compatibility across system upgrades — critical for enterprise environments where software couldn't always be rebuilt. And I got a problem here.
+Solaris ld adds versioned symbols to libraries built by pkgsrc, like this:
+
+```bash
+libz.so.1 =>     /usr/pkg/lib/libz.so.1
+libz.so.1 (SUNW_1.1) =>  (version not found)
+```
+
+This is not an error during runtime, but GNU ld tries to resolve all symbols in all libraries it's linking, why it can cause an error. Especially for `libz.so`, I had to symlink Solaris' `libz.so` to `/usr/pkg/lib` and made GNU ld happy, then I removed the symlink and everything works well.
+
+# too many open files
+
+Some packages (especially glib2 as I remember) try to have a lot of files open and hit Solaris' limit. Solaris has `ulimit` command as usual, but it cannot be more than set in `/etc/system`. And if it's not set, the default is 256.
+
+My settings are:
+
+```bash
+set rlim_fd_max=166384
+set rlim_fd_cur=32768
+```
+
+after changing this file, you need to reboot!
+
+
+## If something is wrong
 
 But, often packages are successfully built with binutils which the process catches (usually, Solaris `/usr/ccs/bin` ones), but sometimes something is failing. Then:
 
@@ -86,8 +138,19 @@ But, often packages are successfully built with binutils which the process catch
 - meson can't find correct tools (pkg-config, cmake, etc.). They aren't mentioned in `USE_TOOLS` in Makefile, just add them.
 - try to use `libsol10-compat` (see below)
 - ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me what I needed to use.
+- if a package tries to bring another version GCC, just comment USE_FEATURES and GCC_REQD in Makefile and use GCC 9.5 (see below).
 
-pkgsrc uses buildlink methodology [https://www.netbsd.org/docs/pkgsrc/buildlink.html](https://www.netbsd.org/docs/pkgsrc/buildlink.html) and symlinks necessary headers, libraries and pkgconfig `.pc` files into `work/.buildlink` subdirectory. It took some time for me to understand how that works! But yes, even if the library is installed but there's no direct dependency (`.mk` file isn't include), it isn't visible in the build process of the package.
+And if everything goes well but fails on the linking phase, then
+
+```bash
+cd work/sourcename-x.y.z
+gmake
+```
+
+Just run `gmake` inside the source folder. In some cases, it just run remaining commands and may get done successfully. Or, there will be a visible error which must be fixed. Often these are:
+
+- missing libraries, e.g. `-lsocket -lnsl` (the software assumes them by default or looks for those functions in libc)
+- ELFCLASS error (flag `-m64` wasn't passed correctly)
 
 ## Solaris 10 compat library
 
@@ -132,6 +195,8 @@ And yes! there's a package! Thank you again Pekdon!
 **Newer version 0.2.x**: I had to add implementation of `open_memstream` to it, then there's a fork: [https://github.com/merclangrat/libsol10-compat](https://github.com/merclangrat/libsol10-compat). I guess there will be more functions/definitions added (`static_assert` is the first candidate).  
 This is not completely my code! ChatGPT helped me to create it.
 
+**TODO** There will be more, because I find more and more things which are not in Solaris 10 and necessary for newer software. Small things, but they cause errors!
+
 ### How to use it
 
 It installs `libsol10_compat_patch_pkgsrc` which patches original pkgsrc files and takes two arguments:
@@ -144,7 +209,7 @@ There's a blog post about trying Solaris 10 as a desktop: [https://pekdon.pekwm.
 
 Even if `security/openssl` is installed, it cannot check certificates. There are older ones by OpenCSW in `/etc/opt/csw/ssl/certs`. I guess they can be used but we can install them using pkgsrc, too
 
-I reminded that I had ca-certificates in Linux, but the package from pkgsrc needs `py-cryptography` which needs **Rust** for building, and Rust isn't available for Solaris-SPARC (yet).
+I reminded that I had ca-certificates in Linux, but the package from pkgsrc needs `py-cryptography` which needs **Rust** for building, and Rust isn't available for Solaris-SPARC (yet). I couldn't build the older version of it because it uses older OpenSSL (1.0 or 1.1) functions and definitions. But I guess it's possible to patch it...
 
 But it's just necessary to install `security/mozilla-rootcerts-openssl` to get newer certificates. They will be stored in /usr/pkg/etc/openssl/certs, and then everything works well!
 
@@ -179,7 +244,7 @@ Unfortunately, I didn't put all my changes into patches (but some of them will b
 
 ## The system python
 
-I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. There's `/usr/sfw/bin/python` coming with Solaris, its version is 2.3.3. Quite old, eh?
+I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Solaris has Python 3, but much older.
 
 ## GCC 9
 
@@ -202,19 +267,9 @@ I used Solaris as (`/usr/ccs/bin/as`) and ld (`/usr/ccs/bin/ld`), also --enable-
 
 The next step is to try to build gcc9 in the pkgsrc using this gcc9! Then, we'll have a package which can be installed without any hacks, and re-build those packages which need newer gcc "by a proper way".
 
+
+
 ## Some issues related to specific packages
-
-Of course this list isn't full, feel free to ask me if you have a specific issue. Sometimes I didn't document thoroughly what happened, sorry for that!
-
-too many open files - Solaris has ulimit as usual, but it cannot be more than set in `/etc/system`. And if it's not set, the default is 256.
-My settings are:
-
-```bash
-set rlim_fd_max=166384
-set rlim_fd_cur=32768
-```
-
-after changing this file, you need to reboot!
 
 ### devel/libuv
 
