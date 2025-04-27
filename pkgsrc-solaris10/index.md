@@ -30,7 +30,7 @@ Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 
 **Those packages are 64-bit. pkgsrc suggests to use ABI=64 in its manual (see below). I think I will try to build 32-bit ones too, or you can try if you want.**
 
-I tried to collect something which I faced during building specific packages - [here is the list](packages.md).  
+I tried to collect particular issues/hacks I faced per package - [here is the list](packages.md).  
 Of course this list isn't full, feel free to ask me if you have a specific issue. Sometimes I didn't document thoroughly what happened, sorry for that!
 
 **Coming soon**: Emulators on Solaris 10 SPARC!
