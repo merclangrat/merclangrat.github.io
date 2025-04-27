@@ -1,5 +1,7 @@
 # Some issues related to specific packages
 
+Some patches are here: [http://lizaurus.com/solaris10/patches](http://lizaurus.com/solaris10/patches)
+
  * [devel/libuv](#devellibuv)
  * [misc/rhash](#miscrhash)
  * [devel/glib2](#develglib2)

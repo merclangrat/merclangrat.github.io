@@ -30,7 +30,7 @@ Also, I built gcc 9.5 from source, see [GCC 9](#gcc-9).
 
 **Those packages are 64-bit. pkgsrc suggests to use ABI=64 in its manual (see below). I think I will try to build 32-bit ones too, or you can try if you want.**
 
-I tried to collect particular issues/hacks I faced per package - [here is the list](packages.md).  
+I tried to collect particular issues/hacks I faced per package - [here is the list](packages.md), and there are some [patches](http://lizaurus.com/solaris10/patches).  
 Of course this list isn't full, feel free to ask me if you have a specific issue. Sometimes I didn't document thoroughly what happened, sorry for that!
 
 **Coming soon**: Emulators on Solaris 10 SPARC!
@@ -226,7 +226,7 @@ To make life simpler, I configure my PATH to look in /usr/pkg first:
 and for root:
 `PATH=/usr/pkg/sbin:/opt/csw/sbin:/usr/sfw/sbin:/usr/sbin:/usr/pkg/bin:/opt/csw/bin:/usr/sfw/bin:/usr/bin:`
 
-Unfortunately, I didn't put all my changes into patches (but some of them will be shared soon). I hope my explanations are useful if anyone needs to use pkgsrc on Solaris 10 SPARC in future.
+Unfortunately, I didn't put all my changes into patches, but I hope my explanations are useful if anyone needs to use pkgsrc on Solaris 10 SPARC in future.
 
 ## The system python
 
