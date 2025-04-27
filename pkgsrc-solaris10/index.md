@@ -219,9 +219,8 @@ When I built `www/netsurf` and started it, there were no letters, only squares. 
 ## The result
 
 The packages I have already built are here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/](http://lizaurus.com/solaris10/pkgsrc-solaris10/)
-Almost all of them have been built by gcc5 from OpenCSW and some tools need its `libgcc_s`.
 
-Packages built by gcc9 (see below) are in a subfolder.
+Almost all of them have been built by gcc5 from OpenCSW and some tools need its `libgcc_s`. Packages built by gcc9 (see below) are in a subfolder.
 
 After the bootstrap, there're `pkg_*` utilities and those packages can be just installed without rebuilding. My bootstrap is also there: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap)
 
@@ -235,8 +234,7 @@ Unfortunately, I didn't put all my changes into patches, but I hope my explanati
 
 ### The system python
 
-I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Solaris has Python 3, but much older.
-
+I think it's a good way to have `python3` and `python` symlinked to `/usr/pkg/bin/python3.12`. Solaris has Python 3, but much older.  
 And there are a lot of Python stuff can be installed using pkgsrc (only except modules depending on Rust).
 
 ## GCC 9
