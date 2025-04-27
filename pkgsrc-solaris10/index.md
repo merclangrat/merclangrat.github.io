@@ -22,7 +22,7 @@ This page will be updated when I get new results. [The packages are here](http:/
 
 ## TL;DR
 
-The idea was to try and learn pkgsrc (not only on NetBSD, but on another system) and have modern software on Solaris. 
+The idea was to try and learn pkgsrc (not only on NetBSD, but on another system) and have modern software on Solaris.  
 It's quite old - Solaris 10 was initially released in 2005, and the latest update (U11) was released in January 2013.
  
 More or less, it’s successful. I am pleasantly surprised.  
@@ -58,11 +58,12 @@ I took [pkgsrc 2024Q3](https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2024Q3/pkgsrc-20
 `sunfreeware.com` is not available anymore (at least, for free), then I am using **gcc5** and other utilities (mentioned in the HOWTO) from [https://www.opencsw.org/](https://www.opencsw.org/) 
 Also, I had to install **sqlite3** from OpenCSW. Then, bootstrap and let's go!
 
-(Just FYI, this is the full list of packages I installed using OpenCSW's `pkgutil`: [http://lizaurus.com/solaris10/pkgutil_list](http://lizaurus.com/solaris10/pkgutil_list). I think, not all of them are necessary anymore, when I have many pkgsrc's packages.
+(Just FYI, this is the full list of packages I installed using OpenCSW's `pkgutil`: [http://lizaurus.com/solaris10/pkgutil_list](http://lizaurus.com/solaris10/pkgutil_list). I think, not all of them are necessary anymore, when I have many pkgsrc packages.
 
 My mk.conf is here: [http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf](http://lizaurus.com/solaris10/pkgsrc-solaris10/bootstrap/mk.conf)
 
-pkgsrc uses buildlink methodology [https://www.netbsd.org/docs/pkgsrc/buildlink.html](https://www.netbsd.org/docs/pkgsrc/buildlink.html) and symlinks necessary headers, libraries and pkgconfig `.pc` files into `work/.buildlink` subdirectory. It took some time for me to understand how that works! But yes, even if the library is installed but there's no direct dependency (`.mk` file isn't include), it isn't visible in the build process of the package.
+pkgsrc uses buildlink methodology [https://www.netbsd.org/docs/pkgsrc/buildlink.html](https://www.netbsd.org/docs/pkgsrc/buildlink.html) and symlinks necessary headers, libraries and pkgconfig `.pc` files into `work/.buildlink` subdirectory. It took some time for me to understand how that works!  
+But yes, even if the library is installed but there's no direct dependency in pkgsrc (`.mk` file isn't included), it isn't visible in the build process of the package.
 
 ## Solaris ABI
 
@@ -126,6 +127,7 @@ But, often packages are successfully built with binutils which the process catch
 - try to use `libsol10-compat` (see below)
 - ...or you have to patch the code/the makefiles/meson build files... In some cases, the compiler suggested me what I needed to use.
 - if a package tries to bring another version GCC, just comment USE_FEATURES and GCC_REQD in Makefile and use GCC 9.5 (see below).
+   - those definitions can be in included `.mk` files, then check carefully!
 
 And if everything goes well but fails on the linking phase, then
 
