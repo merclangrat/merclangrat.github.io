@@ -46,7 +46,7 @@ My collection includes:
 - **Vector-06C** - a "game-oriented" Intel-8080 based computer (unfortunately, not working too)
 - **Iskra-121** - a Soviet calculator (1976) with nixie tubes (more or less working but needs some repairing, capacitors replacement, I think)
 
-Because "bigger" machines used in institutions (Elektronika DVK et al) are very rare and not available (especially in Europe), I am running an [FPGA-based DVK simulator](https://github.com/forth32/dvk-fpga) running **DEMOS**, a Soviet UNIX variant.
+Because "bigger" machines used in institutions (Elektronika DVK et al) are very rare and not available (especially in Europe), I have [FPGA-based DVK simulator](https://github.com/forth32/dvk-fpga) running **DEMOS**, a Soviet UNIX variant.
 
 My page on [Vintage Computer Festival 2020 about BK-0010-01](https://wiki.vcfb.de/2020/en:soviet_computers)
 
