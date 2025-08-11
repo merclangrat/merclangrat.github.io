@@ -19,11 +19,11 @@ I run a home lab where I experiment with stable UNIX-like systems.
 
 In the lab, I have the following machines:
 
-- Sun: Blade 100 and Ultra 60
-- SGI Indy
-- IBM RS/6000 Model 380
-- Apple: PowerBook 520 and PowerMac G3 (both with classic Mac OS)
-- Compaq Contura 4/33 (a laptop running MS-DOS)
+- **Sun: Blade 100 and Ultra 60**
+- **SGI Indy**
+- **IBM RS/6000 Model 380**
+- Apple: **PowerBook 520 and PowerMac G3** (both with classic Mac OS)
+- **Compaq Contura 4/33** (a laptop running MS-DOS)
 - ...some other i386-based machines
 
 Solaris is my "favourite" UNIX since 2000s, I have [a blog post with the story](https://merclangrat.wordpress.com/2024/12/15/solaris-twenty-years-after/).  
@@ -41,12 +41,12 @@ Because I am from the USSR, my big interest is **Soviet computers**, especially 
 
 My collection includes:
 
-- Elektronika BK-0010-01 - a home computer (with a floppy controller, I use real floppies)
-- Elektronika UK-NC - a school computer (not working)
-- Vector-06C - a "game-oriented" Intel-8080 based computer (unfortunately, not working too)
-- Iskra-121 - a Soviet calculator (1976) with nixie tubes (more or less working but needs some repairing, capacitors replacement, I think)
+- **Elektronika BK-0010-01** - a home computer (with a floppy controller, I use real floppies)
+- **Elektronika UK-NC** - a school computer (not working)
+- **Vector-06C** - a "game-oriented" Intel-8080 based computer (unfortunately, not working too)
+- **Iskra-121** - a Soviet calculator (1976) with nixie tubes (more or less working but needs some repairing, capacitors replacement, I think)
 
-Because "bigger" machines used in institutions (Elektronika DVK et al) are very rare and not available (especially in Europe), I am running an FPGA-based DVK simulator running DEMOS, a Soviet UNIX variant.
+Because "bigger" machines used in institutions (Elektronika DVK et al) are very rare and not available (especially in Europe), I am running an [FPGA-based DVK simulator](https://github.com/forth32/dvk-fpga) running **DEMOS**, a Soviet UNIX variant.
 
 My page on [Vintage Computer Festival 2020 about BK-0010-01](https://wiki.vcfb.de/2020/en:soviet_computers)
 
