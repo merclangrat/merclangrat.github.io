@@ -27,7 +27,7 @@ In the lab, I have the following machines:
 - ...some other i386-based machines
 
 Solaris is my "favourite" UNIX since 2000s, I have [a blog post with the story](https://merclangrat.wordpress.com/2024/12/15/solaris-twenty-years-after/).  
-There will be dedicated pages about all those machines, they are now **under construction**.
+There will be dedicated pages about all those machines, they are now *under construction*.
 
 ---
 
@@ -50,7 +50,7 @@ Because "bigger" machines used in institutions (Elektronika DVK et al) are very 
 
 My page on [Vintage Computer Festival 2020 about BK-0010-01](https://wiki.vcfb.de/2020/en:soviet_computers)
 
-There will be more information about resurrecting Vector-06C. The pages are **under construction**.
+There will be more information about resurrecting Vector-06C. The pages are *under construction*.
 
 ---
 
@@ -69,7 +69,8 @@ In my daily life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linu
 
 **Language Note:**
 
-Please contact me in Russian, English, or Ukrainian.
+Please contact me in **Russian**, **English**, or **Ukrainian**.
 
-I do not speak German (and do not plan to). I can read messages in German using translation tools and reply in English, but it is better not to do so — it makes me nervous and uncomfortable, which prevents proper communication.
+**I do not speak German — and I’m not going to.**  
+Sure, I can read German messages with the help of translation tools and reply in English, but please don’t do that. It just makes me nervous and uncomfortable, and honestly, it kills good communication before it even starts. So, if you want to talk to me, write in English, please.
 
