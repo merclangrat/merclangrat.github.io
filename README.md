@@ -31,7 +31,7 @@ There will be dedicated pages about all those machines, they are now *under cons
 
 ---
 
-I spend some time on using **pkgsrc on Solaris 10 SPARC** (using Sun Blade 100).  
+I spend some time on using **pkgsrc on Solaris 10 SPARC** (running on Sun Blade 100).  
 This is the page about my progress: [pkgsrc on Solaris 10 SPARC in 2024](/pkgsrc-solaris10). Feel free to contact me to exchange the experience!  
 If writing emails isn't the best way for you, just comment in my blog.
 
