@@ -13,9 +13,9 @@ I’m a UNIX/BSD/Linux enthusiast with over 20 years of experience in system adm
 
 ---
 
-**Home Lab**
+## Home Lab
 
-I run a home lab where I experiment with stable UNIX-like systems.
+I have a kind of home lab where I experiment with stable UNIX-like systems.
 
 In the lab, I have the following machines:
 
@@ -37,6 +37,8 @@ If writing emails isn't the best way for you, just comment in my blog.
 
 ---
 
+## Computers from the USSR
+
 Because I am from the USSR, my big interest is **Soviet computers**, especially PDP-11 compatible.
 
 My collection includes:
@@ -54,6 +56,8 @@ There will be more information about resurrecting Vector-06C. The pages are *und
 
 ---
 
+## Systems in Daily Life
+
 **I do not use Mac OS X**. It feels like trying to fit a square peg into a round hole. I’m not the right person to ask for help with Mac OS X software or troubleshooting, and I would not use a Mac OS X-based laptop for my work.  
 Also, I disagree with Apple’s current policies and prefer to avoid their modern ecosystem. Mac OS Classic looks much better, anyway.
 
@@ -61,7 +65,7 @@ In my daily life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linu
 
 ---
 
-**Contact**:
+## Contact information
 
 - WhatsApp/Telegram: **+49-170-475-8557** 
 - Email ***mercurius(@)elming.org***
