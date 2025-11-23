@@ -76,5 +76,5 @@ In my daily life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linu
 Please contact me in **Russian**, **English**, or **Ukrainian**.
 
 **I do not speak German — and I do not plan to.**  
-Sure, I can read German messages using translation tools and reply in English, but please don’t. It makes me nervous and uncomfortable, and honestly, it kills good communication before it even starts. So, if you want to talk to me, please write in English.
+Sure, I can read German messages using translation tools and reply in English, but please don’t. It makes me nervous and uncomfortable. So, if you want to talk to me, please write in English.
 
