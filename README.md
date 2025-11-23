@@ -5,7 +5,7 @@ It's under construction, feel free to visit [my blog at Wordpress](https://mercl
 
 My name is **Eugene Bolshakoff**, I am from Uzbekistan (Uzbek SSR those times) and now based in Berlin.
 
-I’m a UNIX/BSD/Linux enthusiast with over 20 years of experience in system administration and a deep passion for retro computing. I love exploring long-lasting systems, interested in the history and internals of classic hardware and software. For me, this is both a profession and a lifelong hobby.
+I'm a UNIX/BSD/Linux enthusiast with over 20 years of experience in system administration and a deep passion for retro computing. I love exploring long-lasting systems, interested in the history and internals of classic hardware and software. For me, this is both a profession and a lifelong hobby.
 
 - [My Github (not so much there)](https://github.com/merclangrat)
 - My CV on [LinkedIn](https://www.linkedin.com/in/merclangrat/)
@@ -58,8 +58,8 @@ There will be more information about resurrecting Vector-06C. The pages are *und
 
 ## Systems in Daily Life
 
-**I do not use Mac OS X**. It feels like trying to fit a square peg into a round hole. I’m not the right person to ask for help with Mac OS X software or troubleshooting, and I would not use a Mac OS X-based laptop for my work.  
-Also, I disagree with Apple’s current policies and prefer to avoid their modern ecosystem. Mac OS Classic looks much better, anyway.
+**I do not use Mac OS X**. It feels like trying to fit a square peg into a round hole. I'm not the right person to ask for help with Mac OS X software or troubleshooting, and I would not use a Mac OS X-based laptop for my work.  
+Also, I disagree with Apple's current policies and prefer to avoid their modern ecosystem. Mac OS Classic looks much better, anyway.
 
 In my daily life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linux distro.
 
@@ -76,5 +76,5 @@ In my daily life, I use [Devuan Linux](https://devuan.org) - a systemd-free Linu
 Please contact me in **Russian**, **English**, or **Ukrainian**.
 
 **I do not speak German — and I do not plan to.**  
-Sure, I can read German messages using translation tools and reply in English, but please don’t. It makes me nervous and uncomfortable. So, if you want to talk to me, please write in English.
+Sure, I can read German messages using translation tools and reply in English, but please don't. It makes me nervous and uncomfortable. So, if you want to talk to me, please write in English.
 
