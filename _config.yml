@@ -1,6 +1,8 @@
 remote_theme: CaptainIRS/hacker-plus-theme
 title: Eugene "Merclangrat" Bolshakoff
 description: The sky above the port was the color of television, tuned to a dead channel. (William Gibson)
+github_username: merclangrat
+linkedin: merclangrat
 
 markdown: kramdown
 kramdown:
