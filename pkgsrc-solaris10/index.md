@@ -1,10 +1,3 @@
----
-
-layout: single
-sidebar: default
-
----
-
 # Using pkgsrc on Solaris 10 SPARC in 2024/25
 
 I am trying to collect all ideas/hacks I used to build software using pkgsrc on Solaris 10 SPARC.
