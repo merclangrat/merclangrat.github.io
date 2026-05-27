@@ -3,11 +3,6 @@
 Welcome to my personal website.  
 It's under construction.
 
-- [My blog at Wordpress](https://merclangrat.wordpress.com)
-- [My blog at Dreamwidth (WIP)](https://merclangrat.dreamwidth.org)
-
-Both are about retro computers (unfortunately, updated not so often).
-
 My name is **Eugene Bolshakoff**, I am from Uzbekistan (Uzbek SSR those times) and now based in Berlin.
 
 I'm a UNIX/BSD/Linux enthusiast with over 20 years of experience in system administration and a deep passion for retro computing. I love exploring long-lasting systems, interested in the history and internals of classic hardware and software. For me, this is both a profession and a lifelong hobby.
@@ -16,11 +11,14 @@ I'm a UNIX/BSD/Linux enthusiast with over 20 years of experience in system admin
 - My CV on [LinkedIn](https://www.linkedin.com/in/merclangrat/)
 - [Some old software, Nekochan FTP archive](http://lizaurus.com)
 
+- [My blog at Wordpress](https://merclangrat.wordpress.com)
+- [My blog at Dreamwidth (WIP)](https://merclangrat.dreamwidth.org)
+
 ---
 
 ## Home Lab
 
-I have a kind of home lab where I experiment with stable UNIX-like systems.
+I have a kind of home lab where I experiment with different UNIX systems.
 
 In the lab, I have the following machines:
 
@@ -38,7 +36,7 @@ There will be dedicated pages about all those machines, they are now *under cons
 
 ---
 
-*May 2026*: Resurrecting **IBM RS/6000 Model 380** - the machine was on the shelf for 16 years.
+*May 2026*: Resurrecting **IBM RS/6000 Model 380** - the machine was on the shelf for 16 years before.
 
 ---
 
