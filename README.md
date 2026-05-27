@@ -1,7 +1,12 @@
 ## Welcome! 
 
 Welcome to my personal website.  
-It's under construction, feel free to visit [my blog at Wordpress](https://merclangrat.wordpress.com) about retro computers.
+It's under construction.
+
+- [My blog at Wordpress](https://merclangrat.wordpress.com)
+- [My blog at Dreamwidth (WIP)](https://merclangrat.dreamwidth.org)
+
+Both are about retro computers (unfortunately, updated not so often).
 
 My name is **Eugene Bolshakoff**, I am from Uzbekistan (Uzbek SSR those times) and now based in Berlin.
 
@@ -19,10 +24,12 @@ I have a kind of home lab where I experiment with stable UNIX-like systems.
 
 In the lab, I have the following machines:
 
-- **Sun: Blade 100 and Ultra 60**
-- **SGI Indy**
+- **Sun Blade 100** running [Illumos](https://illumos.org)
+- **Sun Ultra 60** running **Solaris 10**
+- **SGI Indy** running **IRIX 6.5.22**
 - **IBM RS/6000 Model 380**
-- Apple: **PowerBook 520 and PowerMac G3** (both with classic Mac OS)
+- Apple **PowerBook 520** running **Mac OS 7.6**
+- Apple **PowerMac G3** running **Mac OS 9.2**
 - **Compaq Contura 4/33** (a laptop running MS-DOS)
 - ...some other i386-based machines
 
@@ -31,7 +38,11 @@ There will be dedicated pages about all those machines, they are now *under cons
 
 ---
 
-I spend some time on using **pkgsrc on Solaris 10 SPARC** (running on Sun Blade 100).  
+*May 2026*: Resurrecting **IBM RS/6000 Model 380** - the machine was on the shelf for 16 years.
+
+---
+
+I spend some time on using **pkgsrc on Solaris 10 SPARC** (running on Sun Ultra 60, before on Sun Blade 100).  
 This is the page about my progress: [pkgsrc on Solaris 10 SPARC in 2024](/pkgsrc-solaris10). Feel free to contact me to exchange the experience!  
 If writing emails isn't the best way for you, just comment in my blog.
 
