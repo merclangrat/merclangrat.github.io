@@ -34,12 +34,12 @@ There will be dedicated pages about all those machines, they are now *under cons
 
 ---
 
-*May 2026*: Resurrecting **IBM RS/6000 Model 380** - the machine was on the shelf for 16 years before.
+*May 2026*: Resurrecting **IBM RS/6000 Model 380** - the machine was on the shelf for 16 years.
 
 ---
 
 I spend some time on using **pkgsrc on Solaris 10 SPARC** (running on Sun Ultra 60, before on Sun Blade 100).  
-This is the page about my progress: [pkgsrc on Solaris 10 SPARC in 2024](/pkgsrc-solaris10). Feel free to contact me to exchange the experience!  
+This is the page about my progress: [pkgsrc on Solaris 10 SPARC in 2024/25](/pkgsrc-solaris10). Feel free to contact me to exchange the experience!  
 If writing emails isn't the best way for you, just comment in my blog.
 
 ---
@@ -59,7 +59,7 @@ Because "bigger" machines used in institutions (Elektronika DVK et al) are very 
 
 My page on [Vintage Computer Festival 2020 about BK-0010-01](https://wiki.vcfb.de/2020/en:soviet_computers)
 
-There will be more information about resurrecting Vector-06C. The pages are *under construction*.
+There will be more information about resurrecting Vector-06C when I start doing that :)
 
 ---
 
