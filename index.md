@@ -1,8 +1,6 @@
 ---
-
 layout: single
 sidebar: default
-
 ---
 
 ## Welcome! 

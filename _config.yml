@@ -7,10 +7,11 @@ plugins:
   - jemoji
   - jekyll-include-cache
 
+minimal_mistakes_skin: "neon"
 title: Eugene "Merclangrat" Bolshakoff
 description: The sky above the port was the color of television, tuned to a dead channel. (William Gibson)
+
 sidebar:
-  title: "Eugene Bolshakoff"
   nav:
     - title: "Home"
       url: "/"
