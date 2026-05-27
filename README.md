@@ -1,3 +1,10 @@
+---
+
+layout: single
+sidebar: default
+
+---
+
 ## Welcome! 
 
 Welcome to my personal website.  

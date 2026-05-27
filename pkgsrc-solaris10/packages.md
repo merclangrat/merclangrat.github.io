@@ -1,3 +1,10 @@
+---
+
+layout: single
+sidebar: default
+
+---
+
 # Some issues related to specific packages
 
 Some patches are here: [http://lizaurus.com/solaris10/patches](http://lizaurus.com/solaris10/patches)

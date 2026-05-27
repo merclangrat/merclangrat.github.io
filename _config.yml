@@ -1,3 +1,21 @@
-theme: jekyll-theme-hacker
+theme: minimal-mistakes
 title: Eugene "Merclangrat" Bolshakoff
 description: The sky above the port was the color of television, tuned to a dead channel. (William Gibson)
+sidebar:
+  title: "Eugene Bolshakoff"
+  nav:
+    - title: "Home"
+      url: "/"
+    - title: "Home Lab"
+      url: "#home-lab"
+      children:
+        - title: "Resurrecting RS/6000"
+          url: "/rs6000"
+        - title: "pkgsrc on Solaris 10 SPARC"
+          url: "/pkgsrc-solaris10"
+    - title: "Computers from the USSR"
+      url: "#computers-from-the-ussr"
+    - title: "Systems in daily life"
+      url: "#systems-in-daily-life"
+    - title: "Contact"
+      url: "#contact-information"
