@@ -7,7 +7,8 @@ My name is **Eugene Bolshakoff**, I am from Uzbekistan (Uzbek SSR those times) a
 
 I'm a UNIX/BSD/Linux enthusiast with over 20 years of experience in system administration and a deep passion for retro computing. I love exploring long-lasting systems, interested in the history and internals of classic hardware and software. For me, this is both a profession and a lifelong hobby.
 
-- [Some old software, Nekochan FTP archive](http://lizaurus.com)
+- [Old software, Nekochan FTP archive](http://lizaurus.com)
+- [My home file server (UNIX, DOS software)](http://serana.lizaurus.com) - no https for old computers
 
 - [My blog at Wordpress](https://merclangrat.wordpress.com)
 - [My blog at Dreamwidth (WIP)](https://merclangrat.dreamwidth.org)
